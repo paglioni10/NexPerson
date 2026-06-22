@@ -1,0 +1,27 @@
+# Postgres de desenvolvimento do NexPerson.
+# Carrega db/schema.sql e db/seed.sql automaticamente na primeira inicialização
+# (a imagem postgres executa os .sql de /docker-entrypoint-initdb.d em ordem alfabética).
+#   subir:   docker compose up -d
+#   resetar: docker compose down -v && docker compose up -d
+services:
+  db:
+    image: postgres:16
+    container_name: nexperson-pg
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nex
+      POSTGRES_DB: nexperson
+    ports:
+      - "55432:5432"
+    volumes:
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - nexperson_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nexperson"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  nexperson_pgdata:
