@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Paleta e tokens da marca NexPerson (ver docs/NexPerson.md — Identidade Visual) */
+@theme {
+  --color-brand: #2563eb;          /* Azul Principal */
+  --color-brand-dark: #1e3a8a;     /* Azul Escuro */
+  --color-brand-light: #dbeafe;    /* Azul Claro */
+  --color-ink: #111827;            /* Cinza Escuro (texto) */
+  --color-surface: #f8fafc;        /* Cinza Claro (fundo) */
+
+  /* Cores semânticas de risco (derivadas das categorias de Bus Factor) */
+  --color-risk-critical: #dc2626;  /* BF 0/1 — vermelho */
+  --color-risk-warning: #f59e0b;   /* atenção — laranja */
+  --color-risk-ok: #16a34a;        /* resiliente — verde */
+
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
