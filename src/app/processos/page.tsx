@@ -30,7 +30,7 @@ export default async function ProcessosPage() {
           }
         >
           {processos.map((p) => (
-            <tr key={p.id} className="hover:bg-slate-50">
+            <tr key={p.id} className="hover:bg-subtle">
               <td className="px-4 py-3">
                 <Link
                   href={`/processos/${p.id}`}
@@ -39,11 +39,11 @@ export default async function ProcessosPage() {
                   {p.nome}
                 </Link>
               </td>
-              <td className="px-4 py-3 text-slate-600">{p.area ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{p.area ?? "—"}</td>
               <td className="px-4 py-3">
                 <CriticidadeBadge criticidade={p.criticidade} />
               </td>
-              <td className="px-4 py-3 text-slate-600">{p.atividades}</td>
+              <td className="px-4 py-3 text-muted">{p.atividades}</td>
             </tr>
           ))}
         </Table>

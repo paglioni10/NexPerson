@@ -1,9 +1,9 @@
 /** Traduz o Bus Factor nas categorias auditáveis da spec (ADR-001). */
 export function busFactorCategory(bf: number) {
-  if (bf <= 0) return { label: "Órfã", className: "bg-red-100 text-red-700" };
-  if (bf === 1) return { label: "Risco crítico", className: "bg-red-100 text-red-700" };
-  if (bf === 2) return { label: "Risco moderado", className: "bg-amber-100 text-amber-700" };
-  return { label: "Resiliente", className: "bg-green-100 text-green-700" };
+  if (bf <= 0) return { label: "Órfã", className: "bg-danger-bg text-danger" };
+  if (bf === 1) return { label: "Risco crítico", className: "bg-danger-bg text-danger" };
+  if (bf === 2) return { label: "Risco moderado", className: "bg-warn-bg text-warn" };
+  return { label: "Resiliente", className: "bg-ok-bg text-ok" };
 }
 
 export function RiskBadge({ busFactor }: { busFactor: number }) {

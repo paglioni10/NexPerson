@@ -12,8 +12,8 @@ export function Button({
 }) {
   const styles = {
     primary: "bg-brand text-white hover:bg-brand-dark",
-    ghost: "border border-slate-300 text-slate-700 hover:bg-slate-50",
-    danger: "text-red-600 hover:bg-red-50",
+    ghost: "border border-line text-ink hover:bg-subtle",
+    danger: "text-danger hover:bg-danger-bg",
   }[variant];
   return (
     <button
@@ -38,7 +38,7 @@ export function LinkButton({
   const styles =
     variant === "primary"
       ? "bg-brand text-white hover:bg-brand-dark"
-      : "border border-slate-300 text-slate-700 hover:bg-slate-50";
+      : "border border-line text-ink hover:bg-subtle";
   return (
     <Link
       href={href}
@@ -60,17 +60,17 @@ export function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-slate-700">
+      <span className="mb-1 block text-sm font-medium text-ink">
         {label}
       </span>
       {children}
-      {hint && <span className="mt-1 block text-xs text-slate-400">{hint}</span>}
+      {hint && <span className="mt-1 block text-xs text-faint">{hint}</span>}
     </label>
   );
 }
 
 const fieldClass =
-  "w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand-light";
+  "w-full rounded-md border border-line bg-card px-3 py-2 text-sm text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand-light";
 
 export function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input className={fieldClass} {...props} />;
@@ -100,7 +100,7 @@ export function PageHeader({
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-ink">{title}</h1>
         {description && (
-          <p className="mt-1 text-sm text-slate-500">{description}</p>
+          <p className="mt-1 text-sm text-muted">{description}</p>
         )}
       </div>
       {action}
@@ -116,12 +116,12 @@ export function Table({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+    <div className="overflow-hidden rounded-xl border border-line bg-card">
       <table className="w-full text-sm">
-        <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+        <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
           {head}
         </thead>
-        <tbody className="divide-y divide-slate-100">{children}</tbody>
+        <tbody className="divide-y divide-line">{children}</tbody>
       </table>
     </div>
   );
@@ -129,7 +129,7 @@ export function Table({
 
 export function Empty({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-dashed border-slate-300 bg-white p-10 text-center text-sm text-slate-400">
+    <div className="rounded-xl border border-dashed border-line bg-card p-10 text-center text-sm text-faint">
       {children}
     </div>
   );

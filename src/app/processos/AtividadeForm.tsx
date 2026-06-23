@@ -7,7 +7,7 @@ export function AtividadeForm({ processoId }: { processoId: number }) {
   return (
     <form
       action={saveAtividade}
-      className="rounded-xl border border-slate-200 bg-white p-4"
+      className="rounded-xl border border-line bg-card p-4"
     >
       <input type="hidden" name="processo_id" value={processoId} />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-[2fr_1fr_1fr_auto] md:items-end">

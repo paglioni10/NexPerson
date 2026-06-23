@@ -32,7 +32,7 @@ export default async function VinculosPage({
 
   return (
     <div className="space-y-6">
-      <div className="text-sm text-slate-400">
+      <div className="text-sm text-faint">
         <Link href="/processos" className="hover:underline">
           Processos
         </Link>{" "}

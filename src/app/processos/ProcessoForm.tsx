@@ -34,7 +34,7 @@ export function ProcessoForm({ processo }: { processo?: Processo }) {
         <Button type="submit">Salvar</Button>
         <Link
           href="/processos"
-          className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          className="inline-flex items-center rounded-md border border-line px-3 py-2 text-sm font-medium text-ink hover:bg-subtle"
         >
           Cancelar
         </Link>

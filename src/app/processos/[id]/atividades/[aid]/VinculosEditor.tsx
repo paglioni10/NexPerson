@@ -6,7 +6,7 @@ import type { VinculoRow } from "@/lib/repo";
 import { saveAtribuicao, saveCompetencia } from "./actions";
 
 const selectClass =
-  "rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light disabled:opacity-50";
+  "rounded-md border border-line bg-card px-2 py-1.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light disabled:opacity-50";
 
 export function VinculosEditor({
   atividadeId,
@@ -37,9 +37,9 @@ export function VinculosEditor({
     );
 
   return (
-    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+    <div className="overflow-hidden rounded-xl border border-line bg-card">
       <table className="w-full text-sm">
-        <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+        <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
           <tr>
             <th className="px-4 py-3">Colaborador</th>
             <th className="px-4 py-3">Nível de domínio (capacidade)</th>
@@ -47,17 +47,17 @@ export function VinculosEditor({
             <th className="px-4 py-3">Situação</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100">
+        <tbody className="divide-y divide-line">
           {vinculos.map((v) => {
             const inativo = v.status !== "ativo";
             const capaz = !inativo && v.nivel != null && v.nivel >= nivelMinimoCapaz;
             const falsoBackup = v.papel === "backup" && !capaz;
             return (
-              <tr key={v.colaborador_id} className="hover:bg-slate-50">
+              <tr key={v.colaborador_id} className="hover:bg-subtle">
                 <td className="px-4 py-3 font-medium text-ink">
                   {v.nome}
                   {inativo && (
-                    <span className="ml-2 text-xs font-normal text-slate-400">
+                    <span className="ml-2 text-xs font-normal text-faint">
                       (inativo)
                     </span>
                   )}
@@ -94,15 +94,15 @@ export function VinculosEditor({
                 </td>
                 <td className="px-4 py-3">
                   {falsoBackup ? (
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">
+                    <span className="rounded-full bg-warn-bg px-2 py-0.5 text-xs font-semibold text-warn">
                       Falso backup
                     </span>
                   ) : capaz ? (
-                    <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">
+                    <span className="rounded-full bg-ok-bg px-2 py-0.5 text-xs font-semibold text-ok">
                       Executor capaz
                     </span>
                   ) : (
-                    <span className="text-xs text-slate-400">—</span>
+                    <span className="text-xs text-faint">—</span>
                   )}
                 </td>
               </tr>

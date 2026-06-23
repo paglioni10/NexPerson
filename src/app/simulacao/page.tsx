@@ -6,9 +6,9 @@ import { getSimulacao, listColaboradoresAtivos } from "@/lib/simulacao";
 export const dynamic = "force-dynamic";
 
 const situacaoStyle: Record<string, string> = {
-  "Órfã": "bg-red-100 text-red-700",
-  "Vira crítica": "bg-red-100 text-red-700",
-  "Perde redundância": "bg-amber-100 text-amber-700",
+  "Órfã": "bg-danger-bg text-danger",
+  "Vira crítica": "bg-danger-bg text-danger",
+  "Perde redundância": "bg-warn-bg text-warn",
 };
 
 export default async function SimulacaoPage({
@@ -27,14 +27,14 @@ export default async function SimulacaoPage({
         description="Recálculo determinístico: o que acontece com a continuidade se um colaborador sair."
       />
 
-      <form method="get" className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4">
-        <span className="text-sm font-medium text-slate-600">
+      <form method="get" className="flex items-center gap-3 rounded-xl border border-line bg-card p-4">
+        <span className="text-sm font-medium text-muted">
           O que acontece se sair:
         </span>
         <select
           name="c"
           defaultValue={c ?? ""}
-          className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
+          className="rounded-md border border-line bg-card px-3 py-2 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
         >
           <option value="">Selecione um colaborador…</option>
           {colaboradores.map((col) => (
@@ -79,7 +79,7 @@ export default async function SimulacaoPage({
             />
           </div>
 
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-muted">
             Se <strong>{sim.colaborador.nome}</strong> sair:{" "}
             {sim.resumo.novas_orfas > 0 && (
               <>
@@ -99,9 +99,9 @@ export default async function SimulacaoPage({
               atividade — boa resiliência.
             </Empty>
           ) : (
-            <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+            <div className="overflow-hidden rounded-xl border border-line bg-card">
               <table className="w-full text-sm">
-                <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
                   <tr>
                     <th className="px-4 py-3">Atividade</th>
                     <th className="px-4 py-3">Processo</th>
@@ -110,15 +110,15 @@ export default async function SimulacaoPage({
                     <th className="px-4 py-3">Situação</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-line">
                   {sim.atividades.map((a, i) => (
-                    <tr key={i} className="hover:bg-slate-50">
+                    <tr key={i} className="hover:bg-subtle">
                       <td className="px-4 py-3 font-medium text-ink">{a.nome}</td>
-                      <td className="px-4 py-3 text-slate-600">{a.processo}</td>
+                      <td className="px-4 py-3 text-muted">{a.processo}</td>
                       <td className="px-4 py-3">
                         <CriticidadeBadge criticidade={a.criticidade} />
                       </td>
-                      <td className="px-4 py-3 text-slate-600">
+                      <td className="px-4 py-3 text-muted">
                         {a.bf_antes} → <strong>{a.bf_depois}</strong>
                       </td>
                       <td className="px-4 py-3">

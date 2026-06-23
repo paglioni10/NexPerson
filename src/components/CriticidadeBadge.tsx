@@ -1,7 +1,7 @@
 const styles: Record<string, string> = {
-  Alta: "bg-red-100 text-red-700",
-  Média: "bg-amber-100 text-amber-700",
-  Baixa: "bg-slate-100 text-slate-600",
+  Alta: "bg-danger-bg text-danger",
+  Média: "bg-warn-bg text-warn",
+  Baixa: "bg-subtle text-muted",
 };
 
 export function CriticidadeBadge({ criticidade }: { criticidade: string }) {

@@ -31,17 +31,17 @@ export default async function ColaboradoresPage() {
           }
         >
           {colaboradores.map((c) => (
-            <tr key={c.id} className="hover:bg-slate-50">
+            <tr key={c.id} className="hover:bg-subtle">
               <td className="px-4 py-3 font-medium text-ink">{c.nome}</td>
-              <td className="px-4 py-3 text-slate-600">{c.cargo ?? "—"}</td>
-              <td className="px-4 py-3 text-slate-600">{c.area ?? "—"}</td>
-              <td className="px-4 py-3 text-slate-600">{c.senioridade ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{c.cargo ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{c.area ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{c.senioridade ?? "—"}</td>
               <td className="px-4 py-3">
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
                     c.status === "ativo"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-slate-200 text-slate-600"
+                      ? "bg-ok-bg text-ok"
+                      : "bg-subtle text-muted"
                   }`}
                 >
                   {c.status}
@@ -57,7 +57,7 @@ export default async function ColaboradoresPage() {
                   </a>
                   <form action={removeColaborador}>
                     <input type="hidden" name="id" value={c.id} />
-                    <button className="text-sm font-medium text-red-600 hover:underline">
+                    <button className="text-sm font-medium text-danger hover:underline">
                       Excluir
                     </button>
                   </form>

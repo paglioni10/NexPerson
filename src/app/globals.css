@@ -1,23 +1,104 @@
 @import "tailwindcss";
 
-/* Paleta e tokens da marca NexPerson (ver docs/NexPerson.md — Identidade Visual) */
+/*
+ * Tokens semânticos da marca NexPerson.
+ * As utilidades do Tailwind referenciam var(--color-*), então trocar o tema é
+ * só sobrescrever essas variáveis em [data-theme="..."] (ver docs/NexPerson.md).
+ */
 @theme {
-  --color-brand: #2563eb;          /* Azul Principal */
-  --color-brand-dark: #1e3a8a;     /* Azul Escuro */
-  --color-brand-light: #dbeafe;    /* Azul Claro */
-  --color-ink: #111827;            /* Cinza Escuro (texto) */
-  --color-surface: #f8fafc;        /* Cinza Claro (fundo) */
+  --color-brand: #2563eb;
+  --color-brand-dark: #1e3a8a;
+  --color-brand-light: #dbeafe;
 
-  /* Cores semânticas de risco (derivadas das categorias de Bus Factor) */
-  --color-risk-critical: #dc2626;  /* BF 0/1 — vermelho */
-  --color-risk-warning: #f59e0b;   /* atenção — laranja */
-  --color-risk-ok: #16a34a;        /* resiliente — verde */
+  --color-bg: #f8fafc; /* fundo da página */
+  --color-card: #ffffff; /* superfícies/cartões */
+  --color-subtle: #f1f5f9; /* cabeçalhos de tabela, hover */
+  --color-ink: #111827; /* texto principal */
+  --color-muted: #475569; /* texto secundário */
+  --color-faint: #94a3b8; /* texto terciário */
+  --color-line: #e2e8f0; /* bordas e divisórias */
+
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-warn: #b45309;
+  --color-warn-bg: #fffbeb;
+  --color-ok: #15803d;
+  --color-ok-bg: #f0fdf4;
 
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Modo escuro */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0b1220;
+  --color-card: #111a2e;
+  --color-subtle: #1e293b;
+  --color-ink: #f1f5f9;
+  --color-muted: #aab8cc;
+  --color-faint: #7488a3;
+  --color-line: #334155;
+  --color-brand: #3b82f6;
+  --color-brand-light: #1e3a5f;
+  --color-danger: #f87171;
+  --color-danger-bg: #3a1d1d;
+  --color-warn: #fbbf24;
+  --color-warn-bg: #3a2c0a;
+  --color-ok: #4ade80;
+  --color-ok-bg: #16311f;
+}
+
+/* Alto contraste (preto sobre branco, bordas e acentos fortes) */
+[data-theme="hc"] {
+  --color-bg: #ffffff;
+  --color-card: #ffffff;
+  --color-subtle: #f0f0f0;
+  --color-ink: #000000;
+  --color-muted: #1a1a1a;
+  --color-faint: #333333;
+  --color-line: #000000;
+  --color-brand: #0030c0;
+  --color-brand-dark: #001a80;
+  --color-brand-light: #dde6ff;
+  --color-danger: #a30000;
+  --color-danger-bg: #ffe0e0;
+  --color-warn: #6b3f00;
+  --color-warn-bg: #ffe8cc;
+  --color-ok: #00600f;
+  --color-ok-bg: #d6f5db;
+}
+
 html,
 body {
-  background-color: var(--color-surface);
+  background-color: var(--color-bg);
   color: var(--color-ink);
+}
+
+/* Foco visível consistente para navegação por teclado (WCAG 2.4.7). */
+*:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Link "pular para o conteúdo" — visível apenas ao receber foco. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-brand);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

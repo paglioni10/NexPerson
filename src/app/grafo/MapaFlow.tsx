@@ -73,7 +73,7 @@ function BoxNode({ data, selected }: NodeProps) {
 const nodeTypes = { box: BoxNode };
 
 const ctrlClass =
-  "rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light";
+  "rounded-md border border-line bg-card px-2 py-1.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light";
 
 export function MapaFlow({ grafo }: { grafo: Grafo }) {
   const [focoTipo, setFocoTipo] = useState<FocoTipo>("tudo");
@@ -278,9 +278,9 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white p-3">
+      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-card p-3">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-slate-600">Ver por:</span>
+          <span className="text-sm font-medium text-muted">Ver por:</span>
           <select
             className={ctrlClass}
             value={focoTipo}
@@ -315,12 +315,12 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
 
         <button
           onClick={() => setResetKey((k) => k + 1)}
-          className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          className="rounded-md border border-line px-3 py-1.5 text-sm font-medium text-ink hover:bg-subtle"
         >
           Restaurar organização
         </button>
 
-        <div className="ml-auto flex flex-wrap items-center gap-4 text-sm text-slate-600">
+        <div className="ml-auto flex flex-wrap items-center gap-4 text-sm text-muted">
           <label className="flex items-center gap-1.5">
             <input
               type="checkbox"
@@ -350,7 +350,7 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
         </div>
       </div>
 
-      <div className="h-[calc(100vh-280px)] overflow-hidden rounded-xl border border-slate-200 bg-white">
+      <div className="h-[calc(100vh-280px)] overflow-hidden rounded-xl border border-line bg-card">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -365,12 +365,12 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
           <Controls />
           <MiniMap pannable zoomable />
           <Panel position="top-left">
-            <div className="rounded-lg border border-slate-200 bg-white/90 p-3 text-xs shadow-sm">
+            <div className="rounded-lg border border-line bg-card/90 p-3 text-xs shadow-sm">
               <div className="mb-1 font-semibold text-ink">
                 Exibindo {computed.count.proc} processos · {computed.count.ativ}{" "}
                 atividades · {computed.count.colab} colaboradores
               </div>
-              <div className="mb-1 text-slate-400">
+              <div className="mb-1 text-faint">
                 Arraste para mover · selecione para redimensionar
               </div>
               <div className="flex items-center gap-2">
@@ -387,7 +387,7 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-0.5 w-4 bg-blue-600" /> capaz
-                <span className="ml-2 inline-block h-0.5 w-4 border-t-2 border-dashed border-slate-300" />{" "}
+                <span className="ml-2 inline-block h-0.5 w-4 border-t-2 border-dashed border-line" />{" "}
                 sem capacidade
               </div>
             </div>

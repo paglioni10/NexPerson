@@ -33,7 +33,7 @@ export default async function ProcessoDetailPage({
             </LinkButton>
             <form action={removeProcesso}>
               <input type="hidden" name="id" value={processoId} />
-              <button className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50">
+              <button className="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-danger hover:bg-danger-bg">
                 Excluir
               </button>
             </form>
@@ -41,7 +41,7 @@ export default async function ProcessoDetailPage({
         }
       />
 
-      <div className="flex items-center gap-3 text-sm text-slate-500">
+      <div className="flex items-center gap-3 text-sm text-muted">
         <span>Área: {processo.area ?? "—"}</span>
         <span>·</span>
         <span className="flex items-center gap-1">
@@ -56,9 +56,9 @@ export default async function ProcessoDetailPage({
         {atividades.length === 0 ? (
           <Empty>Nenhuma atividade neste processo.</Empty>
         ) : (
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white">
+          <div className="overflow-hidden rounded-xl border border-line bg-card">
             <table className="w-full text-sm">
-              <thead className="border-b border-slate-200 bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
                   <th className="px-4 py-3">Atividade</th>
                   <th className="px-4 py-3">Criticidade</th>
@@ -66,9 +66,9 @@ export default async function ProcessoDetailPage({
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-line">
                 {atividades.map((a) => (
-                  <tr key={a.atividade_id} className="hover:bg-slate-50">
+                  <tr key={a.atividade_id} className="hover:bg-subtle">
                     <td className="px-4 py-3 font-medium text-ink">{a.nome}</td>
                     <td className="px-4 py-3">
                       <CriticidadeBadge criticidade={a.criticidade} />
@@ -87,7 +87,7 @@ export default async function ProcessoDetailPage({
                         <form action={removeAtividade}>
                           <input type="hidden" name="id" value={a.atividade_id} />
                           <input type="hidden" name="processo_id" value={processoId} />
-                          <button className="text-sm font-medium text-red-600 hover:underline">
+                          <button className="text-sm font-medium text-danger hover:underline">
                             Excluir
                           </button>
                         </form>

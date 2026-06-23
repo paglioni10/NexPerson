@@ -11,20 +11,20 @@ export function ReconcRow({ item }: { item: ReconcExecutor }) {
   const [feito, setFeito] = useState(false);
 
   return (
-    <tr className="hover:bg-slate-50">
+    <tr className="hover:bg-subtle">
       <td className="px-4 py-3 font-medium text-ink">{item.colaborador}</td>
-      <td className="px-4 py-3 text-slate-600">{item.atividade}</td>
-      <td className="px-4 py-3 text-slate-600">{item.execucoes}×</td>
+      <td className="px-4 py-3 text-muted">{item.atividade}</td>
+      <td className="px-4 py-3 text-muted">{item.execucoes}×</td>
       <td className="px-4 py-3 text-right">
         {feito ? (
-          <span className="text-sm font-medium text-green-600">Cadastrado ✓</span>
+          <span className="text-sm font-medium text-ok">Cadastrado ✓</span>
         ) : (
           <div className="flex items-center justify-end gap-2">
             <select
               value={nivel}
               onChange={(e) => setNivel(Number(e.target.value))}
               disabled={pending}
-              className="rounded-md border border-slate-300 bg-white px-2 py-1 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
+              className="rounded-md border border-line bg-card px-2 py-1 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
             >
               {NIVEIS.map((n) => (
                 <option key={n.value} value={n.value}>

@@ -1,14 +1,14 @@
 type Tone = "critical" | "warning" | "neutral";
 
 const toneStyles: Record<Tone, string> = {
-  critical: "border-red-200 bg-red-50",
-  warning: "border-amber-200 bg-amber-50",
-  neutral: "border-slate-200 bg-white",
+  critical: "border-danger/40 bg-danger-bg",
+  warning: "border-warn/40 bg-warn-bg",
+  neutral: "border-line bg-card",
 };
 
 const valueStyles: Record<Tone, string> = {
-  critical: "text-red-600",
-  warning: "text-amber-600",
+  critical: "text-danger",
+  warning: "text-warn",
   neutral: "text-ink",
 };
 
@@ -26,8 +26,8 @@ export function StatCard({
   return (
     <div className={`rounded-xl border p-5 ${toneStyles[tone]}`}>
       <div className={`text-3xl font-bold ${valueStyles[tone]}`}>{value}</div>
-      <div className="mt-1 text-sm font-medium text-slate-700">{label}</div>
-      {hint && <div className="mt-1 text-xs text-slate-500">{hint}</div>}
+      <div className="mt-1 text-sm font-medium text-ink">{label}</div>
+      {hint && <div className="mt-1 text-xs text-muted">{hint}</div>}
     </div>
   );
 }

@@ -17,28 +17,28 @@ export function ImportarForm() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-slate-200 bg-white p-6">
+      <div className="rounded-xl border border-line bg-card p-6">
         <form action={action} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-slate-700">
+            <label className="mb-1 block text-sm font-medium text-ink">
               Arquivo CSV
             </label>
             <input
               type="file"
               name="arquivo"
               accept=".csv,text/csv"
-              className="block w-full text-sm text-slate-600 file:mr-3 file:rounded-md file:border-0 file:bg-brand file:px-3 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-brand-dark"
+              className="block w-full text-sm text-muted file:mr-3 file:rounded-md file:border-0 file:bg-brand file:px-3 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-brand-dark"
             />
           </div>
 
-          <div className="text-center text-xs text-slate-400">— ou cole o conteúdo —</div>
+          <div className="text-center text-xs text-faint">— ou cole o conteúdo —</div>
 
           <div>
             <textarea
               name="texto"
               rows={6}
               placeholder={exemplo}
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 font-mono text-xs text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
+              className="w-full rounded-md border border-line bg-card px-3 py-2 font-mono text-xs text-ink outline-none focus:border-brand focus:ring-2 focus:ring-brand-light"
             />
           </div>
 
@@ -46,7 +46,7 @@ export function ImportarForm() {
             <Button type="submit" disabled={pending}>
               {pending ? "Importando…" : "Importar"}
             </Button>
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-faint">
               Colunas: <code>colaborador, atividade, data</code> (data opcional). O
               casamento é por nome.
             </span>
@@ -58,8 +58,8 @@ export function ImportarForm() {
         <div
           className={`rounded-xl border p-4 text-sm ${
             state.ok
-              ? "border-green-200 bg-green-50 text-green-800"
-              : "border-amber-200 bg-amber-50 text-amber-800"
+              ? "border-ok/40 bg-ok-bg text-ok"
+              : "border-warn/40 bg-warn-bg text-warn"
           }`}
         >
           <p className="font-medium">{state.mensagem}</p>
@@ -77,7 +77,7 @@ export function ImportarForm() {
               {state.erros.map((e, i) => (
                 <li key={i}>
                   Linha {e.linha}: {e.motivo}{" "}
-                  <span className="text-slate-500">({e.conteudo})</span>
+                  <span className="text-muted">({e.conteudo})</span>
                 </li>
               ))}
             </ul>
