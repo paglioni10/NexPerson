@@ -1,14 +1,20 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Background,
   Controls,
   type Edge,
+  Handle,
   MiniMap,
   type Node,
+  type NodeProps,
+  NodeResizer,
   Panel,
+  Position,
   ReactFlow,
+  useEdgesState,
+  useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import type { Grafo } from "@/lib/grafo";
@@ -20,23 +26,51 @@ const COL_COLAB = 660;
 
 type FocoTipo = "tudo" | "processo" | "colaborador" | "atividade";
 
-function bfStyle(bf: number | null): React.CSSProperties {
-  if (bf == null) return { borderColor: "#cbd5e1", background: "#fff" };
-  if (bf <= 1) return { borderColor: "#dc2626", background: "#fef2f2" };
-  if (bf === 2) return { borderColor: "#f59e0b", background: "#fffbeb" };
-  return { borderColor: "#16a34a", background: "#f0fdf4" };
+type BoxData = {
+  label: string;
+  bg: string;
+  border: string;
+  bold?: boolean;
+};
+
+function bfColors(bf: number | null): { bg: string; border: string } {
+  if (bf == null) return { bg: "#fff", border: "#cbd5e1" };
+  if (bf <= 1) return { bg: "#fef2f2", border: "#dc2626" };
+  if (bf === 2) return { bg: "#fffbeb", border: "#f59e0b" };
+  return { bg: "#f0fdf4", border: "#16a34a" };
 }
 
-const baseNode: React.CSSProperties = {
-  borderRadius: 10,
-  borderWidth: 2,
-  borderStyle: "solid",
-  padding: "8px 12px",
-  fontSize: 12,
-  fontWeight: 600,
-  width: 220,
-  color: "#111827",
-};
+/** Nó customizado: caixa arrastável e redimensionável. */
+function BoxNode({ data, selected }: NodeProps) {
+  const d = data as BoxData;
+  return (
+    <>
+      <NodeResizer minWidth={120} minHeight={40} isVisible={!!selected} />
+      <Handle type="target" position={Position.Left} />
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          borderRadius: 10,
+          border: `2px solid ${d.border}`,
+          background: d.bg,
+          padding: "8px 12px",
+          fontSize: d.bold ? 13 : 12,
+          fontWeight: d.bold ? 700 : 600,
+          color: "#111827",
+          boxSizing: "border-box",
+        }}
+      >
+        {d.label}
+      </div>
+      <Handle type="source" position={Position.Right} />
+    </>
+  );
+}
+
+const nodeTypes = { box: BoxNode };
 
 const ctrlClass =
   "rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm outline-none focus:border-brand focus:ring-2 focus:ring-brand-light";
@@ -47,8 +81,8 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
   const [soGargalos, setSoGargalos] = useState(false);
   const [ocultarSemCapacidade, setOcultarSemCapacidade] = useState(false);
   const [mostrarCoexecutores, setMostrarCoexecutores] = useState(true);
+  const [resetKey, setResetKey] = useState(0);
 
-  // Colaboradores únicos (para o seletor e os nós).
   const colaboradores = useMemo(() => {
     const map = new Map<number, string>();
     grafo.links.forEach((l) => map.set(l.colaborador_id, l.nome));
@@ -57,8 +91,8 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
       .sort((a, b) => a.nome.localeCompare(b.nome));
   }, [grafo.links]);
 
-  const { nodes, edges, visibleCount } = useMemo(() => {
-    // 1) Conjuntos visíveis conforme o modo de foco.
+  // Layout automático calculado a partir dos filtros (a "organização padrão").
+  const computed = useMemo(() => {
     let visAtiv = new Set<number>();
     let visProc = new Set<number>();
     let visColab = new Set<number>();
@@ -101,11 +135,9 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
       }
     }
 
-    // 2) Filtro "só gargalos" (BF <= 1) sobre as atividades visíveis.
     if (soGargalos) {
       const bf = new Map(grafo.atividades.map((a) => [a.id, a.bus_factor]));
       visAtiv = new Set([...visAtiv].filter((id) => (bf.get(id) ?? 9) <= 1));
-      // Reduz processos e colaboradores aos ainda conectados.
       visProc = new Set(
         [...visProc].filter((pid) =>
           atividadesDoProc(pid).some((aid) => visAtiv.has(aid)),
@@ -113,7 +145,6 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
       );
     }
 
-    // 3) Arestas visíveis.
     const visLinks = grafo.links.filter(
       (l) =>
         visAtiv.has(l.atividade_id) &&
@@ -121,7 +152,6 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
         (!ocultarSemCapacidade || l.capaz),
     );
 
-    // 4) Remove colaboradores que ficaram sem nenhuma aresta (exceto o focado).
     const colabComLink = new Set(visLinks.map((l) => l.colaborador_id));
     visColab = new Set(
       [...visColab].filter(
@@ -130,7 +160,6 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
       ),
     );
 
-    // 5) Layout sobre o conjunto filtrado (re-empilha, sem buracos).
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
@@ -139,13 +168,13 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
     ativOrdenadas.forEach((a, i) => {
       const y = i * ROW_H;
       atividadeY.set(a.id, y);
+      const c = bfColors(a.bus_factor);
       nodes.push({
         id: `a-${a.id}`,
+        type: "box",
         position: { x: COL_ATIVIDADE, y },
-        data: { label: `${a.nome} · BF ${a.bus_factor}` },
-        style: { ...baseNode, ...bfStyle(a.bus_factor) },
-        sourcePosition: "right" as const,
-        targetPosition: "left" as const,
+        style: { width: 220 },
+        data: { label: `${a.nome} · BF ${a.bus_factor}`, ...c },
       });
     });
 
@@ -156,13 +185,13 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
           .filter((a) => a.processo_id === p.id)
           .map((a) => atividadeY.get(a.id) ?? 0);
         const y = ys.length ? ys.reduce((s, v) => s + v, 0) / ys.length : 0;
+        const c = bfColors(p.bus_factor);
         nodes.push({
           id: `p-${p.id}`,
+          type: "box",
           position: { x: COL_PROCESSO, y },
-          data: { label: p.nome },
-          style: { ...baseNode, ...bfStyle(p.bus_factor), fontWeight: 700, fontSize: 13 },
-          sourcePosition: "right" as const,
-          targetPosition: "left" as const,
+          style: { width: 220 },
+          data: { label: p.nome, ...c, bold: true },
         });
         ativOrdenadas
           .filter((a) => a.processo_id === p.id)
@@ -191,15 +220,14 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
         const concentrado = capazes >= 4;
         nodes.push({
           id: `c-${c.id}`,
+          type: "box",
           position: { x: COL_COLAB, y: i * ROW_H },
-          data: { label: `${c.nome}${capazes ? ` · ${capazes} críticas` : ""}` },
-          style: {
-            ...baseNode,
-            width: 200,
-            background: concentrado ? "#fffbeb" : "#eff6ff",
-            borderColor: concentrado ? "#f59e0b" : "#bfdbfe",
+          style: { width: 200 },
+          data: {
+            label: `${c.nome}${capazes ? ` · ${capazes} críticas` : ""}`,
+            bg: concentrado ? "#fffbeb" : "#eff6ff",
+            border: concentrado ? "#f59e0b" : "#bfdbfe",
           },
-          targetPosition: "left" as const,
         });
       });
 
@@ -217,7 +245,7 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
     return {
       nodes,
       edges,
-      visibleCount: { proc: visProc.size, ativ: visAtiv.size, colab: visColab.size },
+      count: { proc: visProc.size, ativ: visAtiv.size, colab: visColab.size },
     };
   }, [
     grafo,
@@ -229,8 +257,15 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
     mostrarCoexecutores,
   ]);
 
-  // Remonta o canvas quando o filtro muda → reaplica o fitView.
-  const flowKey = `${focoTipo}-${focoId}-${soGargalos}-${ocultarSemCapacidade}-${mostrarCoexecutores}`;
+  // Estado controlado: permite arrastar e redimensionar; persiste na sessão.
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
+
+  // Reaplica o layout automático quando os filtros mudam ou ao "Restaurar".
+  useEffect(() => {
+    setNodes(computed.nodes);
+    setEdges(computed.edges);
+  }, [computed, resetKey, setNodes, setEdges]);
 
   const opcoesFoco =
     focoTipo === "processo"
@@ -243,7 +278,6 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
 
   return (
     <div className="space-y-3">
-      {/* Barra de controles */}
       <div className="flex flex-wrap items-center gap-3 rounded-xl border border-slate-200 bg-white p-3">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-slate-600">Ver por:</span>
@@ -279,6 +313,13 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
           </select>
         )}
 
+        <button
+          onClick={() => setResetKey((k) => k + 1)}
+          className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+        >
+          Restaurar organização
+        </button>
+
         <div className="ml-auto flex flex-wrap items-center gap-4 text-sm text-slate-600">
           <label className="flex items-center gap-1.5">
             <input
@@ -311,9 +352,11 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
 
       <div className="h-[calc(100vh-280px)] overflow-hidden rounded-xl border border-slate-200 bg-white">
         <ReactFlow
-          key={flowKey}
           nodes={nodes}
           edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          nodeTypes={nodeTypes}
           fitView
           minZoom={0.2}
           proOptions={{ hideAttribution: true }}
@@ -324,8 +367,11 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
           <Panel position="top-left">
             <div className="rounded-lg border border-slate-200 bg-white/90 p-3 text-xs shadow-sm">
               <div className="mb-1 font-semibold text-ink">
-                Exibindo {visibleCount.proc} processos · {visibleCount.ativ}{" "}
-                atividades · {visibleCount.colab} colaboradores
+                Exibindo {computed.count.proc} processos · {computed.count.ativ}{" "}
+                atividades · {computed.count.colab} colaboradores
+              </div>
+              <div className="mb-1 text-slate-400">
+                Arraste para mover · selecione para redimensionar
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-3 w-3 rounded border-2 border-red-600 bg-red-50" />
