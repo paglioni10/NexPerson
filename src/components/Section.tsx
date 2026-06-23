@@ -8,11 +8,9 @@ export function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-xl border border-line bg-card p-6">
+    <section className="elev rounded-2xl border border-line bg-card p-6">
       <h2 className="text-base font-bold text-ink">{title}</h2>
-      {description && (
-        <p className="mt-0.5 text-sm text-muted">{description}</p>
-      )}
+      {description && <p className="mt-0.5 text-sm text-muted">{description}</p>}
       <div className="mt-4">{children}</div>
     </section>
   );

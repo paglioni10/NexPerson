@@ -17,7 +17,7 @@ export function ImportarForm() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-line bg-card p-6">
+      <div className="elev rounded-2xl border border-line bg-card p-6">
         <form action={action} className="space-y-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-ink">

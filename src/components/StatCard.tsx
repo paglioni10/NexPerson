@@ -1,9 +1,9 @@
 type Tone = "critical" | "warning" | "neutral";
 
-const toneStyles: Record<Tone, string> = {
-  critical: "border-danger/40 bg-danger-bg",
-  warning: "border-warn/40 bg-warn-bg",
-  neutral: "border-line bg-card",
+const accent: Record<Tone, string> = {
+  critical: "bg-danger",
+  warning: "bg-warn",
+  neutral: "grad-brand",
 };
 
 const valueStyles: Record<Tone, string> = {
@@ -24,10 +24,14 @@ export function StatCard({
   hint?: string;
 }) {
   return (
-    <div className={`rounded-xl border p-5 ${toneStyles[tone]}`}>
-      <div className={`text-3xl font-bold ${valueStyles[tone]}`}>{value}</div>
-      <div className="mt-1 text-sm font-medium text-ink">{label}</div>
-      {hint && <div className="mt-1 text-xs text-muted">{hint}</div>}
+    <div className="elev elev-hover relative overflow-hidden rounded-2xl border border-line bg-card p-5">
+      {/* faixa de acento à esquerda */}
+      <span className={`absolute inset-y-0 left-0 w-1 ${accent[tone]}`} aria-hidden />
+      <div className={`text-4xl font-extrabold tracking-tight ${valueStyles[tone]}`}>
+        {value}
+      </div>
+      <div className="mt-1.5 text-sm font-semibold text-ink">{label}</div>
+      {hint && <div className="mt-0.5 text-xs text-muted">{hint}</div>}
     </div>
   );
 }

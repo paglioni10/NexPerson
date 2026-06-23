@@ -11,14 +11,15 @@ export function Button({
   variant?: "primary" | "ghost" | "danger";
 }) {
   const styles = {
-    primary: "bg-brand text-white hover:bg-brand-dark",
+    primary:
+      "grad-brand text-white shadow-[0_4px_14px_rgba(37,99,235,0.30)] hover:brightness-110",
     ghost: "border border-line text-ink hover:bg-subtle",
     danger: "text-danger hover:bg-danger-bg",
   }[variant];
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${styles}`}
+      className={`inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-all disabled:opacity-50 ${styles}`}
       {...rest}
     >
       {children}
@@ -37,12 +38,12 @@ export function LinkButton({
 }) {
   const styles =
     variant === "primary"
-      ? "bg-brand text-white hover:bg-brand-dark"
+      ? "grad-brand text-white shadow-[0_4px_14px_rgba(37,99,235,0.30)] hover:brightness-110"
       : "border border-line text-ink hover:bg-subtle";
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${styles}`}
+      className={`inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-all ${styles}`}
     >
       {children}
     </Link>
@@ -96,11 +97,11 @@ export function PageHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="mb-6 flex items-end justify-between">
+    <div className="mb-6 flex items-end justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-ink">{title}</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-ink">{title}</h1>
         {description && (
-          <p className="mt-1 text-sm text-muted">{description}</p>
+          <p className="mt-1 max-w-2xl text-sm text-muted">{description}</p>
         )}
       </div>
       {action}
@@ -116,7 +117,7 @@ export function Table({
   children: React.ReactNode;
 }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-card">
+    <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
       <table className="w-full text-sm">
         <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
           {head}
@@ -129,7 +130,7 @@ export function Table({
 
 export function Empty({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-dashed border-line bg-card p-10 text-center text-sm text-faint">
+    <div className="rounded-2xl border border-dashed border-line bg-card p-12 text-center text-sm text-faint">
       {children}
     </div>
   );

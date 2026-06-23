@@ -9,14 +9,16 @@
   --color-brand: #2563eb;
   --color-brand-dark: #1e3a8a;
   --color-brand-light: #dbeafe;
+  --color-brand-2: #1e40af; /* fim do gradiente da marca */
+  --color-accent: #38bdf8; /* acento azul-céu para realces */
 
-  --color-bg: #f8fafc; /* fundo da página */
-  --color-card: #ffffff; /* superfícies/cartões */
-  --color-subtle: #f1f5f9; /* cabeçalhos de tabela, hover */
-  --color-ink: #111827; /* texto principal */
-  --color-muted: #475569; /* texto secundário */
-  --color-faint: #94a3b8; /* texto terciário */
-  --color-line: #e2e8f0; /* bordas e divisórias */
+  --color-bg: #f8fafc;
+  --color-card: #ffffff;
+  --color-subtle: #f1f5f9;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-faint: #94a3b8;
+  --color-line: #e2e8f0;
 
   --color-danger: #dc2626;
   --color-danger-bg: #fef2f2;
@@ -28,27 +30,40 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Modo escuro */
+/* Variáveis não-cor (gradientes/sombras) por tema */
+:root,
+[data-theme="light"] {
+  --grad-app: radial-gradient(1100px 520px at 100% -8%, #dbeafe66, transparent 60%),
+    radial-gradient(900px 480px at -10% 0%, #e0f2fe55, transparent 55%);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 6px 20px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 30px rgba(37, 99, 235, 0.14);
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
-  --color-bg: #0b1220;
-  --color-card: #111a2e;
-  --color-subtle: #1e293b;
+  --color-bg: #070b16;
+  --color-card: #0f1a30;
+  --color-subtle: #16233d;
   --color-ink: #f1f5f9;
   --color-muted: #aab8cc;
   --color-faint: #7488a3;
-  --color-line: #334155;
+  --color-line: #243450;
   --color-brand: #3b82f6;
+  --color-brand-2: #1e40af;
   --color-brand-light: #1e3a5f;
+  --color-accent: #38bdf8;
   --color-danger: #f87171;
   --color-danger-bg: #3a1d1d;
   --color-warn: #fbbf24;
   --color-warn-bg: #3a2c0a;
   --color-ok: #4ade80;
   --color-ok-bg: #16311f;
+  --grad-app: radial-gradient(1100px 560px at 100% -10%, #1e3a8a55, transparent 60%),
+    radial-gradient(900px 520px at -10% 0%, #0c4a6e44, transparent 55%);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.55);
 }
 
-/* Alto contraste (preto sobre branco, bordas e acentos fortes) */
 [data-theme="hc"] {
   --color-bg: #ffffff;
   --color-card: #ffffff;
@@ -59,19 +74,50 @@
   --color-line: #000000;
   --color-brand: #0030c0;
   --color-brand-dark: #001a80;
+  --color-brand-2: #001a80;
   --color-brand-light: #dde6ff;
+  --color-accent: #0030c0;
   --color-danger: #a30000;
   --color-danger-bg: #ffe0e0;
   --color-warn: #6b3f00;
   --color-warn-bg: #ffe8cc;
   --color-ok: #00600f;
   --color-ok-bg: #d6f5db;
+  --grad-app: none;
+  --shadow-card: 0 0 0 1px #000;
+  --shadow-lg: 0 0 0 2px #000;
 }
 
 html,
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
+}
+body {
+  background-image: var(--grad-app);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Utilitários de elevação e gradiente (usados nos componentes) */
+.elev {
+  box-shadow: var(--shadow-card);
+}
+.elev-hover {
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.elev-hover:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.grad-brand {
+  background-image: linear-gradient(135deg, var(--color-brand), var(--color-brand-2));
+}
+.grad-text {
+  background-image: linear-gradient(120deg, var(--color-brand), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Foco visível consistente para navegação por teclado (WCAG 2.4.7). */
@@ -94,6 +140,11 @@ body {
 }
 .skip-link:focus {
   left: 0;
+}
+
+/* Barra de rolagem discreta e temática */
+* {
+  scrollbar-color: var(--color-line) transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

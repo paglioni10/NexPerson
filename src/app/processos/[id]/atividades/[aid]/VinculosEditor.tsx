@@ -37,7 +37,7 @@ export function VinculosEditor({
     );
 
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-card">
+    <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
       <table className="w-full text-sm">
         <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
           <tr>

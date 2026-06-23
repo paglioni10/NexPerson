@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import Link from "next/link";
+import { Nav } from "@/components/Nav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
 
@@ -10,15 +11,6 @@ export const metadata: Metadata = {
   title: "NexPerson — Mapa de Dependência Humana",
   description: "Transformando conhecimento em continuidade.",
 };
-
-const nav = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/colaboradores", label: "Colaboradores" },
-  { href: "/processos", label: "Processos" },
-  { href: "/grafo", label: "Mapa" },
-  { href: "/simulacao", label: "Simulação" },
-  { href: "/reconciliacao", label: "Reconciliação" },
-];
 
 // Aplica o tema salvo antes da primeira pintura (evita "flash" de tema errado).
 const temaScript = `(function(){try{var t=localStorage.getItem('tema')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
@@ -33,33 +25,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#conteudo" className="skip-link">
           Pular para o conteúdo
         </a>
-        <header className="border-b border-line bg-card">
+        <header className="sticky top-0 z-50 border-b border-line bg-card/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand font-bold text-white">
+            <Link href="/dashboard" className="flex items-center gap-2.5">
+              <span className="grad-brand grid h-9 w-9 place-items-center rounded-xl font-bold text-white shadow-[0_4px_12px_rgba(37,99,235,0.35)]">
                 N
               </span>
-              <span className="text-lg font-bold tracking-tight text-ink">
-                Nex<span className="text-brand">Person</span>
+              <span className="text-lg font-extrabold tracking-tight text-ink">
+                Nex<span className="grad-text">Person</span>
               </span>
             </Link>
             <div className="flex items-center gap-4">
-              <nav aria-label="Navegação principal" className="flex gap-1 text-sm font-medium">
-                {nav.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-md px-3 py-2 text-muted transition-colors hover:bg-subtle hover:text-ink"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
+              <Nav />
               <ThemeToggle />
             </div>
           </div>
         </header>
-        <main id="conteudo" className="mx-auto max-w-6xl px-6 py-8">
+        <main id="conteudo" className="mx-auto max-w-6xl px-6 py-10">
           {children}
         </main>
       </body>

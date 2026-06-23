@@ -27,7 +27,7 @@ export default async function SimulacaoPage({
         description="Recálculo determinístico: o que acontece com a continuidade se um colaborador sair."
       />
 
-      <form method="get" className="flex items-center gap-3 rounded-xl border border-line bg-card p-4">
+      <form method="get" className="flex items-center gap-3 elev rounded-2xl border border-line bg-card p-4">
         <span className="text-sm font-medium text-muted">
           O que acontece se sair:
         </span>
@@ -99,7 +99,7 @@ export default async function SimulacaoPage({
               atividade — boa resiliência.
             </Empty>
           ) : (
-            <div className="overflow-hidden rounded-xl border border-line bg-card">
+            <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
               <table className="w-full text-sm">
                 <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
                   <tr>
