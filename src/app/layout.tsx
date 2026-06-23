@@ -16,6 +16,7 @@ const nav = [
   { href: "/processos", label: "Processos" },
   { href: "/grafo", label: "Mapa" },
   { href: "/simulacao", label: "Simulação" },
+  { href: "/reconciliacao", label: "Reconciliação" },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

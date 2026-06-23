@@ -107,3 +107,28 @@ export async function getReconciliacao(): Promise<Reconciliacao[]> {
   `;
   return rows.map((r) => ({ ...r, execucoes: num(r.execucoes) }));
 }
+
+export type ReconcExecutor = {
+  colaborador_id: number;
+  colaborador: string;
+  atividade_id: number;
+  atividade: string;
+  execucoes: number;
+};
+
+export async function getReconciliacaoExecutores(): Promise<ReconcExecutor[]> {
+  const rows = await sql<ReconcExecutor[]>`
+    select colaborador_id, colaborador, atividade_id, atividade, execucoes
+    from vw_reconc_executor_nao_cadastrado
+    order by execucoes desc, colaborador
+  `;
+  return rows.map((r) => ({ ...r, execucoes: num(r.execucoes) }));
+}
+
+export type ReconcBackup = { colaborador: string; atividade: string };
+
+export async function getReconciliacaoBackups(): Promise<ReconcBackup[]> {
+  return sql<ReconcBackup[]>`
+    select colaborador, atividade from vw_reconc_backup_inativo order by colaborador
+  `;
+}
