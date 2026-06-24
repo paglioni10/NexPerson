@@ -10,6 +10,7 @@ const nav = [
   { href: "/grafo", label: "Mapa" },
   { href: "/simulacao", label: "Simulação" },
   { href: "/reconciliacao", label: "Reconciliação" },
+  { href: "/analise", label: "Análise IA" },
 ];
 
 export function Nav() {
