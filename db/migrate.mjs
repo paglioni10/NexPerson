@@ -6,9 +6,21 @@ import { fileURLToPath } from "node:url";
 import postgres from "postgres";
 
 const dir = dirname(fileURLToPath(import.meta.url));
-const url = process.env.DATABASE_URL;
+
+// Fallback: lê DATABASE_URL do .env.local se não estiver no ambiente.
+function lerEnvLocal() {
+  try {
+    const txt = readFileSync(join(dir, "..", ".env.local"), "utf8");
+    const linha = txt.split("\n").find((l) => l.startsWith("DATABASE_URL="));
+    return linha?.slice("DATABASE_URL=".length).trim();
+  } catch {
+    return undefined;
+  }
+}
+
+const url = process.env.DATABASE_URL || lerEnvLocal();
 if (!url) {
-  console.error("Defina DATABASE_URL antes de rodar.");
+  console.error("Defina DATABASE_URL (ambiente ou .env.local) antes de rodar.");
   process.exit(1);
 }
 
