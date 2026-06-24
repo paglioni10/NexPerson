@@ -12,7 +12,7 @@ export function Button({
 }) {
   const styles = {
     primary:
-      "grad-brand text-white shadow-[0_4px_14px_rgba(37,99,235,0.30)] hover:brightness-110",
+      "brand-fill shadow-[0_1px_3px_rgba(17,24,39,0.12)]",
     ghost: "border border-line text-ink hover:bg-subtle",
     danger: "text-danger hover:bg-danger-bg",
   }[variant];
@@ -38,7 +38,7 @@ export function LinkButton({
 }) {
   const styles =
     variant === "primary"
-      ? "grad-brand text-white shadow-[0_4px_14px_rgba(37,99,235,0.30)] hover:brightness-110"
+      ? "brand-fill shadow-[0_1px_3px_rgba(17,24,39,0.12)]"
       : "border border-line text-ink hover:bg-subtle";
   return (
     <Link
@@ -117,7 +117,7 @@ export function Table({
   children: React.ReactNode;
 }) {
   return (
-    <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
+    <div className="elev overflow-hidden rounded-card border border-line bg-card">
       <table className="w-full text-sm">
         <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
           {head}
@@ -130,7 +130,7 @@ export function Table({
 
 export function Empty({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border border-dashed border-line bg-card p-12 text-center text-sm text-faint">
+    <div className="rounded-card border border-dashed border-line bg-card p-12 text-center text-sm text-faint">
       {children}
     </div>
   );

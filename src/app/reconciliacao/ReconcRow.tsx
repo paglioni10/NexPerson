@@ -40,7 +40,7 @@ export function ReconcRow({ item }: { item: ReconcExecutor }) {
                   setFeito(true);
                 })
               }
-              className="rounded-md bg-brand px-3 py-1 text-sm font-medium text-white hover:bg-brand-dark disabled:opacity-50"
+              className="brand-fill rounded-lg px-3 py-1 text-sm font-semibold disabled:opacity-50"
             >
               Cadastrar competência
             </button>

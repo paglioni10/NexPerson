@@ -278,7 +278,7 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-3 elev rounded-2xl border border-line bg-card p-3">
+      <div className="flex flex-wrap items-center gap-3 elev rounded-card border border-line bg-card p-3">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-muted">Ver por:</span>
           <select
@@ -350,7 +350,7 @@ export function MapaFlow({ grafo }: { grafo: Grafo }) {
         </div>
       </div>
 
-      <div className="h-[calc(100vh-280px)] elev overflow-hidden rounded-2xl border border-line bg-card">
+      <div className="h-[calc(100vh-280px)] elev overflow-hidden rounded-card border border-line bg-card">
         <ReactFlow
           nodes={nodes}
           edges={edges}

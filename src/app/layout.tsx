@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import Link from "next/link";
+import { Logo } from "@/components/Logo";
 import { Nav } from "@/components/Nav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import "./globals.css";
@@ -28,11 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="sticky top-0 z-50 border-b border-line bg-card/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
             <Link href="/dashboard" className="flex items-center gap-2.5">
-              <span className="grad-brand grid h-9 w-9 place-items-center rounded-xl font-bold text-white shadow-[0_4px_12px_rgba(37,99,235,0.35)]">
-                N
-              </span>
+              <Logo size={34} />
               <span className="text-lg font-extrabold tracking-tight text-ink">
-                Nex<span className="grad-text">Person</span>
+                Nex<span className="text-brand">Person</span>
               </span>
             </Link>
             <div className="flex items-center gap-4">

@@ -32,7 +32,7 @@ export default async function ReconciliacaoPage() {
         {executores.length === 0 ? (
           <Empty>Sem divergências. Importe um CSV de execuções para reconciliar.</Empty>
         ) : (
-          <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
+          <div className="elev overflow-hidden rounded-card border border-line bg-card">
             <table className="w-full text-sm">
               <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>
@@ -63,7 +63,7 @@ export default async function ReconciliacaoPage() {
         {backups.length === 0 ? (
           <Empty>Nenhum backup sem execução registrada.</Empty>
         ) : (
-          <div className="elev overflow-hidden rounded-2xl border border-line bg-card">
+          <div className="elev overflow-hidden rounded-card border border-line bg-card">
             <table className="w-full text-sm">
               <thead className="border-b border-line bg-subtle text-left text-xs font-semibold uppercase tracking-wide text-muted">
                 <tr>

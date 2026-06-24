@@ -17,7 +17,7 @@ export function ImportarForm() {
 
   return (
     <div className="space-y-6">
-      <div className="elev rounded-2xl border border-line bg-card p-6">
+      <div className="elev rounded-card border border-line bg-card p-6">
         <form action={action} className="space-y-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-ink">
@@ -27,7 +27,7 @@ export function ImportarForm() {
               type="file"
               name="arquivo"
               accept=".csv,text/csv"
-              className="block w-full text-sm text-muted file:mr-3 file:rounded-md file:border-0 file:bg-brand file:px-3 file:py-2 file:text-sm file:font-medium file:text-white hover:file:bg-brand-dark"
+              className="block w-full text-sm text-muted file:mr-3 file:rounded-md file:border-0 file:bg-brand file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white"
             />
           </div>
 

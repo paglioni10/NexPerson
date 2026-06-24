@@ -3,7 +3,7 @@ type Tone = "critical" | "warning" | "neutral";
 const accent: Record<Tone, string> = {
   critical: "bg-danger",
   warning: "bg-warn",
-  neutral: "grad-brand",
+  neutral: "bg-brand",
 };
 
 const valueStyles: Record<Tone, string> = {
@@ -24,7 +24,7 @@ export function StatCard({
   hint?: string;
 }) {
   return (
-    <div className="elev elev-hover relative overflow-hidden rounded-2xl border border-line bg-card p-5">
+    <div className="elev elev-hover relative overflow-hidden rounded-card border border-line bg-card p-5">
       {/* faixa de acento à esquerda */}
       <span className={`absolute inset-y-0 left-0 w-1 ${accent[tone]}`} aria-hidden />
       <div className={`text-4xl font-extrabold tracking-tight ${valueStyles[tone]}`}>

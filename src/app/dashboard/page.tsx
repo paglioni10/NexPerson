@@ -22,11 +22,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="grad-brand elev relative overflow-hidden rounded-2xl p-7 text-white">
-        <div
-          className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10 blur-2xl"
-          aria-hidden
-        />
+      <div className="brand-fill elev relative overflow-hidden rounded-card p-7">
         <h1 className="text-3xl font-extrabold tracking-tight">Dashboard Executivo</h1>
         <p className="mt-1.5 max-w-2xl text-sm text-white/85">
           Contagens acionáveis de risco de continuidade — cada número rastreável até
