@@ -21,7 +21,7 @@ export type Analise = {
   fonte: "ia" | "fallback";
 };
 
-const MODEL = "gemini-2.0-flash";
+const MODEL = "gemini-2.5-flash";
 
 async function buildPayload() {
   const [dashboard, processos, concentracao, falsos, reconc, orfas] =
@@ -99,22 +99,29 @@ export async function gerarAnalise(): Promise<Analise> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return fallback(payload);
 
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: SYSTEM }] },
+    contents: [
+      { parts: [{ text: `${TASK}\n\nJSON:\n${JSON.stringify(payload)}` }] },
+    ],
+    generationConfig: { temperature: 0.3, responseMimeType: "application/json" },
+  });
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
+
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`,
-      {
+    // O modelo pode retornar 503 (alta demanda) de forma transitória — tentamos de novo.
+    let res: Response | null = null;
+    for (let tentativa = 0; tentativa < 3; tentativa++) {
+      res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM }] },
-          contents: [
-            { parts: [{ text: `${TASK}\n\nJSON:\n${JSON.stringify(payload)}` }] },
-          ],
-          generationConfig: { temperature: 0.3, responseMimeType: "application/json" },
-        }),
-      },
-    );
-    if (!res.ok) return fallback(payload);
+        body,
+      });
+      if (res.ok) break;
+      if (res.status !== 503 && res.status !== 429) break;
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+    if (!res || !res.ok) return fallback(payload);
     const data = await res.json();
     const text: string | undefined =
       data?.candidates?.[0]?.content?.parts?.[0]?.text;
