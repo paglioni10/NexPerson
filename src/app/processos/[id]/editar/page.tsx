@@ -16,7 +16,7 @@ export default async function EditarProcessoPage({
 
   return (
     <div>
-      <PageHeader title={`Editar — ${processo.nome}`} />
+      <PageHeader title={`Editar, ${processo.nome}`} />
       <ProcessoForm processo={processo} />
     </div>
   );

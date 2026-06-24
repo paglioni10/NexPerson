@@ -1,5 +1,5 @@
 -- =====================================================================
--- NexPerson — Seed de demonstração: empresa fictícia "Acme"
+-- NexPerson, Seed de demonstração: empresa fictícia "Acme"
 -- Gargalos PLANTADOS de propósito para a demo evidenciar cada métrica:
 --   • Folha de Pagamento com Bus Factor = 1 (exemplo canônico da spec)
 --   • Atividade ÓRFÃ (BF=0): "Escalonamento de chamados"
@@ -26,7 +26,7 @@ insert into colaborador (id, nome, cargo, area, departamento, senioridade, tempo
  (4, 'Ana Lima',        'Analista de RH',             'RH',          'Pessoas',        'Pleno',  '6 anos', 'ativo'),
  (5, 'Pedro Costa',     'Atendente',                  'Atendimento', 'Operações',      'Júnior', '2 anos', 'ativo'),
  (6, 'Beatriz Rocha',   'Coordenadora de Operações',  'Compras',     'Suprimentos',    'Sênior', '7 anos', 'ativo'),
- (7, 'Lucas Almeida',   'Ex-Analista Financeiro',     'Financeiro',  'Administrativo', 'Pleno',  '—',      'inativo'),
+ (7, 'Lucas Almeida',   'Ex-Analista Financeiro',     'Financeiro',  'Administrativo', 'Pleno',  '-',      'inativo'),
  (8, 'Fernanda Dias',   'Assistente de RH',           'RH',          'Pessoas',        'Júnior', '1 ano',  'ativo');
 
 -- ---------------------------------------------------------------------
@@ -64,7 +64,7 @@ insert into atividade (id, processo_id, nome, criticidade, frequencia) values
  (14,5, 'Escalonamento de chamados',       'Alta',  'Diária');
 
 -- ---------------------------------------------------------------------
--- COMPETÊNCIA (capacidade real)  — nivel: 1..4
+-- COMPETÊNCIA (capacidade real) , nivel: 1..4
 -- ---------------------------------------------------------------------
 insert into competencia (colaborador_id, atividade_id, nivel) values
  -- Financeiro
@@ -89,7 +89,7 @@ insert into competencia (colaborador_id, atividade_id, nivel) values
  (5, 14, 1);                         -- Escalonamento: Pedro Iniciante (NÃO capaz) → BF=0 ÓRFÃ
 
 -- ---------------------------------------------------------------------
--- ATRIBUIÇÃO (papel designado) — independe da capacidade
+-- ATRIBUIÇÃO (papel designado), independe da capacidade
 -- ---------------------------------------------------------------------
 insert into atribuicao (colaborador_id, atividade_id, papel) values
  -- Financeiro
@@ -113,7 +113,7 @@ insert into atribuicao (colaborador_id, atividade_id, papel) values
  (5, 14,'principal');                          -- principal sem capacidade → órfã
 
 -- ---------------------------------------------------------------------
--- EVENTOS DE EXECUÇÃO (logs importados via CSV) — para reconciliação
+-- EVENTOS DE EXECUÇÃO (logs importados via CSV), para reconciliação
 -- ---------------------------------------------------------------------
 insert into evento_execucao (atividade_id, colaborador_id, executado_em, fonte) values
  -- Execuções coerentes com o cadastro

@@ -25,18 +25,18 @@ export default async function DashboardPage() {
       <div className="brand-fill elev relative overflow-hidden rounded-card p-7">
         <h1 className="text-3xl font-extrabold tracking-tight">Dashboard Executivo</h1>
         <p className="mt-1.5 max-w-2xl text-sm text-white/85">
-          Contagens acionáveis de risco de continuidade — cada número rastreável até
+          Contagens acionáveis de risco de continuidade, cada número rastreável até
           sua origem.
         </p>
       </div>
 
-      {/* Contagens acionáveis (ADR-001 §4) — sem score composto opaco */}
+      {/* Contagens acionáveis (ADR-001 §4), sem score composto opaco */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <StatCard
           label="Atividades órfãs"
           value={d.atividades_orfas}
           tone={d.atividades_orfas > 0 ? "critical" : "neutral"}
-          hint="Bus Factor 0 — ninguém capaz"
+          hint="Bus Factor 0, ninguém capaz"
         />
         <StatCard
           label="Processos com Bus Factor 1"
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
               {falsos.map((f, i) => (
                 <li key={i} className="py-2.5 text-sm">
                   <span className="font-medium text-ink">{f.colaborador}</span>
-                  <span className="text-muted"> — {f.atividade}</span>
+                  <span className="text-muted">, {f.atividade}</span>
                 </li>
               ))}
             </ul>
@@ -137,7 +137,7 @@ export default async function DashboardPage() {
 
         <Section
           title="Reconciliação: execução × cadastro"
-          description="Executa nos registros, mas não consta como competente — possível backup real a validar."
+          description="Executa nos registros, mas não consta como competente, possível backup real a validar."
         >
           {reconc.length === 0 ? (
             <p className="text-sm text-faint">Sem divergências.</p>

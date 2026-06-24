@@ -31,7 +31,7 @@ export function ImportarForm() {
             />
           </div>
 
-          <div className="text-center text-xs text-faint">— ou cole o conteúdo —</div>
+          <div className="text-center text-xs text-faint">ou cole o conteúdo</div>
 
           <div>
             <textarea

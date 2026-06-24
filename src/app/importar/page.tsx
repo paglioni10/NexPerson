@@ -6,7 +6,7 @@ export default function ImportarPage() {
     <div>
       <PageHeader
         title="Importar execuções (CSV)"
-        description="Logs de execução de ERP/Monday. Servem para sugerir cadastros e reconciliar — não definem capacidade (ADR-002)."
+        description="Logs de execução de ERP/Monday. Servem para sugerir cadastros e reconciliar, não definem capacidade (ADR-002)."
       />
       <ImportarForm />
     </div>

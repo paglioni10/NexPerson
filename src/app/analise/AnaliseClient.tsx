@@ -15,7 +15,7 @@ export function AnaliseClient() {
           {pending ? "Gerando análise…" : analise ? "Gerar novamente" : "Gerar análise"}
         </Button>
         <span className="text-sm text-muted">
-          A IA traduz em texto os números já calculados — não estima nem decide.
+          A IA traduz em texto os números já calculados, não estima nem decide.
         </span>
       </form>
 
@@ -54,7 +54,7 @@ export function AnaliseClient() {
           </Card>
 
           <p className="text-xs text-faint">
-            Sugestão gerada por IA — revise antes de decidir.
+            Sugestão gerada por IA, revise antes de decidir.
           </p>
         </div>
       )}

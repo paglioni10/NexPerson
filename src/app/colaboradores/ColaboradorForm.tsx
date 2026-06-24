@@ -19,7 +19,7 @@ export function ColaboradorForm({ colaborador }: { colaborador?: Colaborador }) 
         </Field>
         <Field label="Senioridade">
           <Select name="senioridade" defaultValue={colaborador?.senioridade ?? ""}>
-            <option value="">—</option>
+            <option value="">-</option>
             {SENIORIDADE.map((s) => (
               <option key={s} value={s}>{s}</option>
             ))}

@@ -96,7 +96,7 @@ export default async function SimulacaoPage({
           {sim.atividades.length === 0 ? (
             <Empty>
               A saída de {sim.colaborador.nome} não reduz o Bus Factor de nenhuma
-              atividade — boa resiliência.
+              atividade, boa resiliência.
             </Empty>
           ) : (
             <div className="elev overflow-hidden rounded-card border border-line bg-card">

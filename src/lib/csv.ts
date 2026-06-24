@@ -1,4 +1,4 @@
-/** Parser de CSV mínimo e sem dependências — suporta campos entre aspas. */
+/** Parser de CSV mínimo e sem dependências, suporta campos entre aspas. */
 export function parseCsv(text: string): string[][] {
   const rows: string[][] = [];
   let field = "";

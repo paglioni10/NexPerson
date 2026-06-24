@@ -39,7 +39,7 @@ export default async function ProcessosPage() {
                   {p.nome}
                 </Link>
               </td>
-              <td className="px-4 py-3 text-muted">{p.area ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{p.area ?? "-"}</td>
               <td className="px-4 py-3">
                 <CriticidadeBadge criticidade={p.criticidade} />
               </td>

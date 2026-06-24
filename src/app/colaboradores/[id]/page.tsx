@@ -16,7 +16,7 @@ export default async function EditarColaboradorPage({
 
   return (
     <div>
-      <PageHeader title={`Editar — ${colaborador.nome}`} />
+      <PageHeader title={`Editar, ${colaborador.nome}`} />
       <ColaboradorForm colaborador={colaborador} />
     </div>
   );

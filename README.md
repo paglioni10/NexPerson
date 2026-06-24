@@ -1,6 +1,6 @@
 # NexPerson
 
-> Mapa de Dependência Humana da Empresa — *"Transformando conhecimento em continuidade."*
+> Mapa de Dependência Humana da Empresa, *"Transformando conhecimento em continuidade."*
 
 Plataforma que identifica, visualiza e monitora a dependência de pessoas nos
 processos de uma empresa, transformando risco operacional invisível em indicadores
@@ -36,7 +36,7 @@ npm run db:reset   # recria o banco do zero (schema + seed)
 ```
 db/        schema.sql (tabelas + views das métricas) e seed.sql
 docs/      documento mestre, prompts de IA
-src/app/   rotas (App Router) — dashboard, cadastros, mapa
+src/app/   rotas (App Router), dashboard, cadastros, mapa
 src/lib/   acesso a dados (server-only) e consultas às métricas
 src/components/  UI reutilizável
 ```

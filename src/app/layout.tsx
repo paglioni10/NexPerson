@@ -9,7 +9,7 @@ import "./globals.css";
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
-  title: "NexPerson — Mapa de Dependência Humana",
+  title: "NexPerson, Mapa de Dependência Humana",
   description: "Transformando conhecimento em continuidade.",
 };
 

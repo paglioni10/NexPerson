@@ -44,7 +44,7 @@ export default async function VinculosPage({
 
       <PageHeader
         title={atividade.nome}
-        description="Defina capacidade (nível) e designação (papel) — são independentes."
+        description="Defina capacidade (nível) e designação (papel), são independentes."
         action={<CriticidadeBadge criticidade={atividade.criticidade} />}
       />
 

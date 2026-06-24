@@ -140,7 +140,7 @@ export type VinculoRow = {
 
 /**
  * Para uma atividade, lista TODOS os colaboradores com seu nível (competência) e
- * papel (atribuição) — capacidade e designação separadas (ADR-005).
+ * papel (atribuição), capacidade e designação separadas (ADR-005).
  */
 export async function getVinculos(atividadeId: number): Promise<VinculoRow[]> {
   return sql<VinculoRow[]>`

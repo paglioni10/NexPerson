@@ -1,5 +1,5 @@
 /**
- * Marca NexPerson — um "N" formado por nós conectados (nexus) com um hub central,
+ * Marca NexPerson, um "N" formado por nós conectados (nexus) com um hub central,
  * dentro de um círculo. Simboliza continuidade irradiando pela organização.
  */
 export function Logo({ size = 36 }: { size?: number }) {

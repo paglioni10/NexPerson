@@ -1,7 +1,7 @@
-# NexPerson — Camada de IA (prompts)
+# NexPerson, Camada de IA (prompts)
 
 > **Princípio inegociável (ADR-001 + ADR-004):** a IA atua **apenas na camada de
-> linguagem**. Ela **não calcula, não estima e não inventa números** — recebe os
+> linguagem**. Ela **não calcula, não estima e não inventa números**, recebe os
 > valores já calculados pelas views SQL e apenas os **traduz em texto**. Toda saída é
 > **sugestão** para decisão humana, com enquadramento de risco/continuidade (nunca
 > avaliação de desempenho de pessoas).
@@ -13,7 +13,7 @@
 ## Contrato de entrada (o que o backend envia à IA)
 
 O backend consulta as views e monta **um único JSON** com os dados já calculados.
-A IA recebe esse JSON — nunca o banco, nunca SQL.
+A IA recebe esse JSON, nunca o banco, nunca SQL.
 
 ```json
 {
@@ -65,7 +65,7 @@ REGRAS ABSOLUTAS:
 1. Use SOMENTE os dados fornecidos no JSON. Nunca invente, estime ou calcule
    números, nomes ou fatos que não estejam ali. Se um dado não existe, não o cite.
 2. Você NÃO avalia desempenho, produtividade ou valor de pessoas. Você analisa a
-   VULNERABILIDADE DOS PROCESSOS e a concentração de conhecimento — sempre com foco
+   VULNERABILIDADE DOS PROCESSOS e a concentração de conhecimento, sempre com foco
    em resiliência e continuidade, nunca em julgar indivíduos.
 3. Toda conclusão é uma SUGESTÃO de apoio à decisão humana, não uma determinação.
 4. Linguagem: português do Brasil, tom corporativo, claro e objetivo. Sem jargão
@@ -80,13 +80,13 @@ GLOSSÁRIO (para interpretar os dados):
   "ico_alerta" = ponto de concentração.
 - IRO ponderado: % de cobertura com backup, ponderado por criticidade.
 - Falso backup: pessoa designada como backup mas sem capacidade real (inativa ou
-  nível abaixo do mínimo) — risco de falsa sensação de segurança.
+  nível abaixo do mínimo), risco de falsa sensação de segurança.
 - Reconciliação: divergência entre o que foi declarado e o que os logs mostram.
 ```
 
 ---
 
-## Tarefa 1 — Diagnóstico (lista de achados)
+## Tarefa 1, Diagnóstico (lista de achados)
 
 ```
 Com base no JSON abaixo, gere um DIAGNÓSTICO objetivo dos riscos de continuidade.
@@ -108,7 +108,7 @@ JSON:
 
 ---
 
-## Tarefa 2 — Recomendações (ações priorizadas)
+## Tarefa 2, Recomendações (ações priorizadas)
 
 ```
 Com base no JSON abaixo, gere RECOMENDAÇÕES acionáveis para reduzir o risco de
@@ -136,7 +136,7 @@ JSON:
 
 ---
 
-## Tarefa 3 — Resumo executivo (parágrafo)
+## Tarefa 3, Resumo executivo (parágrafo)
 
 ```
 Com base no JSON abaixo, escreva um RESUMO EXECUTIVO de 3 a 5 frases para a
@@ -159,20 +159,20 @@ JSON:
 
 ---
 
-## Simulação de impacto — NÃO usa IA
+## Simulação de impacto, NÃO usa IA
 
 A pergunta "o que acontece se Maria sair?" é respondida por **recálculo
 determinístico** das views (remover a pessoa e recomputar BF/IRO/órfãs). A IA pode,
-opcionalmente, apenas **redigir** o resultado já calculado em linguagem natural —
+opcionalmente, apenas **redigir** o resultado já calculado em linguagem natural ,
 nunca calcular o impacto.
 
 ---
 
 ## Notas de implementação
 - Enviar o JSON sempre completo e atual (gerado a partir das views no momento da
-  chamada) — a IA é stateless.
+  chamada), a IA é stateless.
 - `temperature` baixa (ex.: 0.2–0.3): queremos fidelidade aos dados, não criatividade.
 - Validar a saída: se a IA mencionar um número que não está no JSON, descartar/repetir.
-- Toda tela que exibe texto de IA traz o rótulo "Sugestão gerada por IA — revise
+- Toda tela que exibe texto de IA traz o rótulo "Sugestão gerada por IA, revise
   antes de decidir" (ADR-004).
 ```

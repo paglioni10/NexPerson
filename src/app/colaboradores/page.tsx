@@ -33,9 +33,9 @@ export default async function ColaboradoresPage() {
           {colaboradores.map((c) => (
             <tr key={c.id} className="hover:bg-subtle">
               <td className="px-4 py-3 font-medium text-ink">{c.nome}</td>
-              <td className="px-4 py-3 text-muted">{c.cargo ?? "—"}</td>
-              <td className="px-4 py-3 text-muted">{c.area ?? "—"}</td>
-              <td className="px-4 py-3 text-muted">{c.senioridade ?? "—"}</td>
+              <td className="px-4 py-3 text-muted">{c.cargo ?? "-"}</td>
+              <td className="px-4 py-3 text-muted">{c.area ?? "-"}</td>
+              <td className="px-4 py-3 text-muted">{c.senioridade ?? "-"}</td>
               <td className="px-4 py-3">
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs font-semibold ${

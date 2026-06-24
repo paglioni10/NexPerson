@@ -42,7 +42,7 @@ export default async function ProcessoDetailPage({
       />
 
       <div className="flex items-center gap-3 text-sm text-muted">
-        <span>Área: {processo.area ?? "—"}</span>
+        <span>Área: {processo.area ?? "-"}</span>
         <span>·</span>
         <span className="flex items-center gap-1">
           Criticidade: <CriticidadeBadge criticidade={processo.criticidade} />

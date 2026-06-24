@@ -14,7 +14,7 @@ export const PAPEL_LABEL: Record<(typeof PAPEL)[number], string> = {
   backup: "Backup",
 };
 
-/** Níveis de domínio (1..4) — ordinais, conforme docs/NexPerson.md §0. */
+/** Níveis de domínio (1..4), ordinais, conforme docs/NexPerson.md §0. */
 export const NIVEIS = [
   { value: 1, label: "Iniciante" },
   { value: 2, label: "Intermediário" },

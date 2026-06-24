@@ -69,7 +69,7 @@ export function VinculosEditor({
                     disabled={pending}
                     onChange={(e) => onNivel(v.colaborador_id, e.target.value)}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     {NIVEIS.map((n) => (
                       <option key={n.value} value={n.value}>
                         {n.label}
@@ -84,7 +84,7 @@ export function VinculosEditor({
                     disabled={pending}
                     onChange={(e) => onPapel(v.colaborador_id, e.target.value)}
                   >
-                    <option value="">—</option>
+                    <option value="">-</option>
                     {PAPEL.map((p) => (
                       <option key={p} value={p}>
                         {PAPEL_LABEL[p]}
@@ -102,7 +102,7 @@ export function VinculosEditor({
                       Executor capaz
                     </span>
                   ) : (
-                    <span className="text-xs text-faint">—</span>
+                    <span className="text-xs text-faint">-</span>
                   )}
                 </td>
               </tr>

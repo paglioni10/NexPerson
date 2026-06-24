@@ -1,11 +1,11 @@
 -- =====================================================================
--- NexPerson — Schema PostgreSQL (DDL) + Views das Métricas
+-- NexPerson, Schema PostgreSQL (DDL) + Views das Métricas
 -- Materializa o ADR-005 (modelo de dados) e o ADR-001 (métricas auditáveis).
 --
--- Princípio: as métricas (Bus Factor, ICO, IRO) são VIEWS SQL — qualquer
+-- Princípio: as métricas (Bus Factor, ICO, IRO) são VIEWS SQL, qualquer
 -- pessoa lê a consulta e confere de onde vem cada número. Sem "score mágico".
 --
--- Escopo MVP: empresa única (sem empresa_id / multi-tenant — ver ADR-005 SaaS).
+-- Escopo MVP: empresa única (sem empresa_id / multi-tenant, ver ADR-005 SaaS).
 -- =====================================================================
 
 -- Limpeza idempotente (facilita rodar de novo durante o desenvolvimento)
@@ -74,7 +74,7 @@ create table atividade (
 );
 
 -- =====================================================================
--- 3. VÍNCULO PESSOA↔ATIVIDADE — SEPARADO em duas tabelas (ADR-005)
+-- 3. VÍNCULO PESSOA↔ATIVIDADE, SEPARADO em duas tabelas (ADR-005)
 --    capacidade (competencia)  ≠  designação (atribuicao)
 -- =====================================================================
 
@@ -117,7 +117,7 @@ create function fn_peso(crit text) returns int as $$
 $$ language sql stable;
 
 -- =====================================================================
--- 5. MÉTRICAS (VIEWS) — o coração auditável do NexPerson
+-- 5. MÉTRICAS (VIEWS), o coração auditável do NexPerson
 -- =====================================================================
 
 -- 5.1 Quem é "Executor Capaz" (ADR-001 §0): ativo E nível >= threshold.
@@ -146,7 +146,7 @@ left join vw_executor_capaz ec on ec.atividade_id = a.id
 group by a.id;
 
 -- 5.3 Bus Factor por processo = MÍNIMO entre as atividades CRÍTICAS (Alta).
---     (o elo mais fraco derruba a cadeia — média mascararia o risco)
+--     (o elo mais fraco derruba a cadeia, média mascararia o risco)
 create view vw_bus_factor_processo as
 select p.id   as processo_id,
        p.nome,
@@ -195,7 +195,7 @@ select
         as iro_ponderado;
 
 -- 5.6 FALSO BACKUP: designado como backup mas SEM capacidade real.
---     (papel ≠ capacidade — um dos insights centrais do produto)
+--     (papel ≠ capacidade, um dos insights centrais do produto)
 create view vw_falso_backup as
 select atr.colaborador_id,
        col.nome as colaborador,
@@ -212,7 +212,7 @@ where  atr.papel = 'backup'
   );
 
 -- =====================================================================
--- 6. RECONCILIAÇÃO declarado-vs-real (ADR-002) — cruza eventos × cadastro
+-- 6. RECONCILIAÇÃO declarado-vs-real (ADR-002), cruza eventos × cadastro
 -- =====================================================================
 
 -- 6.1 Quem EXECUTOU (nos logs) mas NÃO está cadastrado como competente.
@@ -250,7 +250,7 @@ where  atr.papel = 'backup'
   );
 
 -- =====================================================================
--- 7. DASHBOARD EXECUTIVO — contagens acionáveis (ADR-001 §4)
+-- 7. DASHBOARD EXECUTIVO, contagens acionáveis (ADR-001 §4)
 -- =====================================================================
 create view vw_dashboard as
 select

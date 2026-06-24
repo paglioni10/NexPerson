@@ -1,4 +1,4 @@
-# NexPerson — Mapa de Dependência Humana da Empresa
+# NexPerson, Mapa de Dependência Humana da Empresa
 
 > **Slogan:** "Transformando conhecimento em continuidade."
 >
@@ -15,16 +15,16 @@
 ## Sumário
 
 - [Convenção de escopo (MVP × SaaS)](#convenção-de-escopo)
-- [Parte I — Visão de Produto](#parte-i--visão-de-produto)
-- [Parte II — Funcionalidades](#parte-ii--funcionalidades)
-- [Parte III — Decisões de Arquitetura (ADRs)](#parte-iii--decisões-de-arquitetura-adrs)
-  - [ADR-001 — Métricas baseadas em capacidade auditável](#adr-001--métricas-de-risco-baseadas-em-capacidade-auditável)
-  - [ADR-002 — Integração é reconciliação, não fonte da verdade](#adr-002--origem-dos-dados-integração-é-reconciliação-não-fonte-da-verdade)
-  - [ADR-003/004 — Governança, LGPD e ética](#adr-003004--governança-lgpd-e-ética)
-  - [ADR-005 — Modelo de dados (separar capacidade de designação)](#adr-005--modelo-de-dados-separar-capacidade-de-designação-opção-b)
+- [Parte I, Visão de Produto](#parte-i-visão-de-produto)
+- [Parte II, Funcionalidades](#parte-ii-funcionalidades)
+- [Parte III, Decisões de Arquitetura (ADRs)](#parte-iii-decisões-de-arquitetura-adrs)
+  - [ADR-001, Métricas baseadas em capacidade auditável](#adr-001-métricas-de-risco-baseadas-em-capacidade-auditável)
+  - [ADR-002, Integração é reconciliação, não fonte da verdade](#adr-002-origem-dos-dados-integração-é-reconciliação-não-fonte-da-verdade)
+  - [ADR-003/004, Governança, LGPD e ética](#adr-003004-governança-lgpd-e-ética)
+  - [ADR-005, Modelo de dados (separar capacidade de designação)](#adr-005-modelo-de-dados-separar-capacidade-de-designação-opção-b)
   - [Decisões pendentes](#decisões-pendentes)
-- [Parte IV — Especificação de Métricas (detalhada)](#parte-iv--especificação-de-métricas-detalhada)
-- [Parte V — Stack e Identidade Visual](#parte-v--stack-e-identidade-visual)
+- [Parte IV, Especificação de Métricas (detalhada)](#parte-iv-especificação-de-métricas-detalhada)
+- [Parte V, Stack e Identidade Visual](#parte-v-stack-e-identidade-visual)
 
 ---
 
@@ -32,19 +32,19 @@
 
 Toda decisão é registrada em **duas trilhas paralelas**:
 
-- 🎓 **MVP (Portfólio)** — versão demonstrável, focada em conseguir a vaga.
+- 🎓 **MVP (Portfólio)**, versão demonstrável, focada em conseguir a vaga.
   Critério: entregável sozinho, sem dependências externas, 100% funcional e
   defensável numa entrevista.
-- 🚀 **Produto (SaaS)** — para onde a decisão evolui num produto real e vendável.
+- 🚀 **Produto (SaaS)**, para onde a decisão evolui num produto real e vendável.
   Critério: viável comercialmente, escalável, multi-empresa.
 
 > O MVP nunca promete o que não entrega; o SaaS é sempre roadmap explícito.
 > **Regra anti-escopo:** na dúvida entre MVP e SaaS, é SaaS. O MVP deve doer de tão
-> enxuto — é assim que ele fica terminável.
+> enxuto, é assim que ele fica terminável.
 
 ---
 
-# Parte I — Visão de Produto
+# Parte I, Visão de Produto
 
 ## Objetivo
 Desenvolver uma plataforma web que identifique, visualize e monitore a dependência
@@ -74,7 +74,7 @@ Digital · Consultorias Empresariais.
 - Reconciliação entre o que é declarado e o que de fato acontece na operação.
 - Simulação de desligamento de colaboradores (determinística).
 - Recomendações por IA na camada de linguagem.
-- Foco em continuidade operacional e governança — não em avaliação de pessoas.
+- Foco em continuidade operacional e governança, não em avaliação de pessoas.
 
 ## Valor para Portfólio
 Demonstra competências de Transformação Digital: mapeamento e otimização de
@@ -84,7 +84,7 @@ reais e pensamento estratégico voltado à redução de riscos operacionais.
 
 ---
 
-# Parte II — Funcionalidades
+# Parte II, Funcionalidades
 
 ## 1. Cadastro Organizacional
 **Colaboradores:** nome, cargo, área, departamento, tempo de empresa, nível de
@@ -95,18 +95,18 @@ senioridade, status (ativo/inativo).
 
 **Atividades** (cada processo tem N): nome, descrição, tempo médio de execução,
 criticidade, frequência de execução.
-*Exemplo — processo "Pagamento de Fornecedores":* conferir notas fiscais, aprovar
+*Exemplo, processo "Pagamento de Fornecedores":* conferir notas fiscais, aprovar
 pagamentos, realizar pagamento bancário.
 
 ## 2. Relacionamento entre Pessoas e Atividades
 Associa colaboradores a atividades. **Decisão de modelagem (ADR-005):** separar
 *capacidade* de *designação*.
-- **Capacidade (competência):** nível de domínio na atividade — Iniciante,
+- **Capacidade (competência):** nível de domínio na atividade, Iniciante,
   Intermediário, Avançado, Especialista.
-- **Designação (atribuição):** papel — executor principal, secundário, backup.
+- **Designação (atribuição):** papel, executor principal, secundário, backup.
 
 > A separação é o que permite detectar o "falso backup" (designado como backup, mas
-> sem capacidade real) — um dos insights centrais do produto.
+> sem capacidade real), um dos insights centrais do produto.
 
 ## 3. Mapeamento de Dependência (automático)
 O sistema identifica automaticamente:
@@ -139,7 +139,7 @@ Financeiro
 
 ## 6. Indicadores Inteligentes
 Bus Factor, Índice de Concentração Operacional (ICO), Índice de Redundância
-Operacional (IRO). Definição completa e auditável na [Parte IV](#parte-iv--especificação-de-métricas-detalhada).
+Operacional (IRO). Definição completa e auditável na [Parte IV](#parte-iv-especificação-de-métricas-detalhada).
 
 ## 7. Módulo de IA
 IA aplicada **apenas na camada de linguagem**:
@@ -155,15 +155,15 @@ cai de 79% para 52%."*
 
 ---
 
-# Parte III — Decisões de Arquitetura (ADRs)
+# Parte III, Decisões de Arquitetura (ADRs)
 
-## ADR-001 — Métricas de risco baseadas em capacidade auditável
+## ADR-001, Métricas de risco baseadas em capacidade auditável
 **Problema:** evitar scores arbitrários (ex.: "Índice de Dependência = 92").
-**Status:** Decidido. Especificação detalhada na [Parte IV](#parte-iv--especificação-de-métricas-detalhada).
+**Status:** Decidido. Especificação detalhada na [Parte IV](#parte-iv-especificação-de-métricas-detalhada).
 
 **Decisão comum às duas trilhas:** três métricas derivadas de um único parâmetro
 auditável (`NÍVEL_MÍNIMO_CAPAZ`): Bus Factor, ICO e IRO. Nada de score composto
-opaco — o topo do dashboard usa **contagens acionáveis** (atividades órfãs,
+opaco, o topo do dashboard usa **contagens acionáveis** (atividades órfãs,
 processos com BF=1, pessoas acima do ICO, falsos backups, IRO ponderado).
 
 | Aspecto | 🎓 MVP (Portfólio) | 🚀 Produto (SaaS) |
@@ -173,16 +173,16 @@ processos com BF=1, pessoas acima do ICO, falsos backups, IRO ponderado).
 | Bus Factor de processo | Mínimo das atividades críticas | Idem + modelagem de dependência/ordem entre atividades |
 | Threshold "capaz" | Global, configurável | Configurável **por processo** |
 
-## ADR-002 — Origem dos dados: integração é reconciliação, não fonte da verdade
+## ADR-002, Origem dos dados: integração é reconciliação, não fonte da verdade
 **Problema (nº4):** quem alimenta os dados? Como manter o mapa vivo sem cadastro
 manual interminável.
 
 **Insight central:** logs de ERP/Monday medem **execução**, não **capacidade**.
-As métricas exigem capacidade (quem é capaz, em que nível, e quem é backup — que
+As métricas exigem capacidade (quem é capaz, em que nível, e quem é backup, que
 por definição quase não aparece nos logs). Portanto a integração **não pode ser a
 fonte da verdade de capacidade**. Seu papel correto é **bootstrap + reconciliação**.
 
-> Frase-guia: *"O NexPerson não adivinha quem é capaz a partir dos logs — ele usa
+> Frase-guia: *"O NexPerson não adivinha quem é capaz a partir dos logs, ele usa
 > os logs para questionar o que o gestor declarou e manter o mapa honesto."*
 
 | Aspecto | 🎓 MVP (Portfólio) | 🚀 Produto (SaaS) |
@@ -190,22 +190,22 @@ fonte da verdade de capacidade**. Seu papel correto é **bootstrap + reconcilia�
 | Entrada de dados | **Import CSV/planilha genérico** (export de qualquer ERP/Monday → CSV) | Conectores nativos (Sankhya, Monday, etc.) implementando a interface abstrata |
 | Arquitetura | **Conector abstrato** `evento → atividade → executor → timestamp`, com CSV como 1ª implementação | Múltiplas implementações do mesmo conector |
 | Papel da automação | Sugerir candidatos ao cadastro (tira a folha em branco) | Idem + sincronização contínua |
-| Reconciliação declarado-vs-real | **Sim — recurso central** (caça "falsos backups", valida BF=1, sugere vínculos faltantes) | Idem, contínua e com alertas |
+| Reconciliação declarado-vs-real | **Sim, recurso central** (caça "falsos backups", valida BF=1, sugere vínculos faltantes) | Idem, contínua e com alertas |
 | Risco de execução (concentração) | Exibido, **rotulado como distinto** de risco de capacidade | Idem |
-| Integração nativa com ERP | ❌ Fora do escopo — apenas roadmap citado | ✅ Núcleo do valor |
+| Integração nativa com ERP | ❌ Fora do escopo, apenas roadmap citado | ✅ Núcleo do valor |
 
 **Por que não citar Sankhya no MVP:** sem ambiente real para testar, integração
 nativa vira slide, não software. CSV genérico cobre 100% dos sistemas, é
 demonstrável de verdade e prova a arquitetura de conectores.
 
-## ADR-003/004 — Governança, LGPD e ética
+## ADR-003/004, Governança, LGPD e ética
 **Problema (nº5):** mitigar LGPD, ética e percepção interna dos colaboradores.
 
 **Posicionamento (comum às duas trilhas):** plataforma de **gestão de risco
 operacional e continuidade**, não de avaliação de pessoas. Recomendações
 (treinamento cruzado, backups, sucessão) visam resiliência do processo.
 
-**Reenquadramento crítico — assumir, não negar:** o NexPerson **processa dado
+**Reenquadramento crítico, assumir, não negar:** o NexPerson **processa dado
 pessoal e gera, sim, indicadores individuais** (o ICO é um número por pessoa). A
 proteção não vem de negar isso, vem do **propósito + controles**. Negar a
 existência do dado individual é insustentável e desmorona em due diligence.
@@ -215,7 +215,7 @@ existência do dado individual é insustentável e desmorona em due diligence.
 
 | Aspecto | 🎓 MVP (Portfólio) | 🚀 Produto (SaaS) |
 |---------|-------------------|-------------------|
-| Reconhecer dado individual | Sim — UI/README assumem que ICO é indicador individual com propósito de risco | Idem + mapeamento formal de dados pessoais |
+| Reconhecer dado individual | Sim, UI/README assumem que ICO é indicador individual com propósito de risco | Idem + mapeamento formal de dados pessoais |
 | Base legal | Citada no README (legítimo interesse: continuidade) | **LIA documentada** (teste de proporcionalidade) |
 | Minimização | Declarar o que **não** se coleta (sem salário, sem desempenho, sem dado sensível) | Política formal + enforcement no schema |
 | Controle de acesso | Visões agregadas por padrão; nominal sinalizado | RBAC por finalidade; nominal exige permissão+justificativa |
@@ -225,16 +225,16 @@ existência do dado individual é insustentável e desmorona em due diligence.
 | Retenção / ex-colaboradores | Premissa declarada | Política de retenção e descarte |
 
 **Insight de produto:** declarar o que se **recusa a coletar** é uma das provas
-mais fortes de conformidade — e a transparência ao colaborador melhora o dado
+mais fortes de conformidade, e a transparência ao colaborador melhora o dado
 (ele corrige) e a aceitação interna.
 
-## ADR-005 — Modelo de dados: separar capacidade de designação (Opção B)
+## ADR-005, Modelo de dados: separar capacidade de designação (Opção B)
 **Problema:** como modelar o vínculo pessoa↔atividade. **Status:** Decidido.
 
-**Decisão:** sobre **PostgreSQL** (relacional, não banco de grafo — o "grafo" tem só
+**Decisão:** sobre **PostgreSQL** (relacional, não banco de grafo, o "grafo" tem só
 3 níveis e as métricas são agregações, melhor servidas por SQL auditável). O vínculo
 pessoa↔atividade é modelado em **duas tabelas distintas**, porque *capacidade ≠
-designação* — e é isso que torna a detecção de "falso backup" um simples JOIN.
+designação*, e é isso que torna a detecção de "falso backup" um simples JOIN.
 
 **Esquema central:**
 ```
@@ -249,7 +249,7 @@ competencia      (colaborador_id→, atividade_id→, nivel)    ← CAPACIDADE
 atribuicao       (colaborador_id→, atividade_id→, papel)    ← DESIGNAÇÃO da empresa
                                                               (principal/secundário/backup)
 evento_execucao  (atividade_id→, colaborador_id→,           ← append-only, imutável
-                  executado_em, fonte)                        (reconciliação — ADR-002)
+                  executado_em, fonte)                        (reconciliação, ADR-002)
 config_empresa   (nivel_minimo_capaz, pesos_criticidade,    ← parâmetros do ADR-001
                   ico_alerta, …)
 ```
@@ -261,7 +261,7 @@ config_empresa   (nivel_minimo_capaz, pesos_criticidade,    ← parâmetros do A
 - "Falso backup" = `atribuicao.papel='backup' AND (competencia ausente OU nivel <
   threshold)` → JOIN trivial.
 - As métricas (Bus Factor, ICO, IRO) são implementadas como **views SQL** sobre o
-  schema — qualquer um lê o SQL e confere o número (honra o princípio de
+  schema, qualquer um lê o SQL e confere o número (honra o princípio de
   auditabilidade do ADR-001).
 
 **Por que não banco de grafo (Neo4j):** travessias profundas não são o gargalo aqui;
@@ -276,14 +276,14 @@ num SaaS com grafos de conhecimento muito mais ricos (decisão consciente de roa
 | Histórico | Estado atual | Versionamento de `competencia` (evolução de treinamento) |
 | `evento_execucao` | Tabela append-only simples | Particionamento por data |
 
-## ADR-006 — Stack, autenticação e escopo do MVP
+## ADR-006, Stack, autenticação e escopo do MVP
 **Status:** Decidido.
 
 - **Backend:** **somente Next.js** (API routes / server actions) + Supabase.
-  FastAPI cortado — um único deploy, MVP terminável. (Python, se desejado, em
+  FastAPI cortado, um único deploy, MVP terminável. (Python, se desejado, em
   projeto à parte.)
 - **Visualização:** **React Flow** (D3.js descartado).
-- **Autenticação:** **Supabase Auth**, integrada ao RLS — reforça a narrativa de
+- **Autenticação:** **Supabase Auth**, integrada ao RLS, reforça a narrativa de
   LGPD/controle de acesso (ADR-003/004).
 - **Escopo do MVP:** núcleo (cadastro + métricas como views + dashboard + grafo)
   **+ simulação de impacto + import CSV + módulo de IA**.
@@ -295,29 +295,29 @@ num SaaS com grafos de conhecimento muito mais ricos (decisão consciente de roa
 | Reconciliação declarado-vs-real | ✅ (cruza `evento_execucao` × `competencia`, caça falso backup) | ✅ contínua, com alertas |
 | Módulo de IA | ✅ camada de linguagem | + análises mais ricas |
 
-**Provedor de IA (MVP):** **Google Gemini API (free tier)** — cota grátis,
+**Provedor de IA (MVP):** **Google Gemini API (free tier)**, cota grátis,
 suficiente para gerar texto a partir dos números. A camada de IA é fina e isolada,
 então trocar de provedor (Groq, OpenRouter, Anthropic) é trivial.
 
 ## Decisões pendentes
 - [x] Seed de dados realista com gargalos plantados → `db/seed.sql`.
 - [x] DDL completo (Postgres) com as views das métricas → `db/schema.sql`
-      (validado em Postgres 16 — números conferem com o gabarito).
+      (validado em Postgres 16, números conferem com o gabarito).
 - [x] Prompts da camada de IA → `docs/ia-prompts.md`.
-- [ ] (Opcional) Contagem executiva "processos comprometidos (BF≤1)" — hoje um
+- [ ] (Opcional) Contagem executiva "processos comprometidos (BF≤1)", hoje um
       processo com atividade crítica órfã (BF=0) não é destacado no nível de processo.
 
 > Toda decisão futura segue o formato 🎓 MVP / 🚀 SaaS.
 
 ---
 
-# Parte IV — Especificação de Métricas (detalhada)
+# Parte IV, Especificação de Métricas (detalhada)
 
 > **Princípio reitor:** toda métrica deve ser **explicável, reproduzível e
 > auditável**. Nenhum número aparece na tela sem que o usuário possa clicar e ver de
 > quais atividades, pessoas e pesos ele deriva. Não há "score mágico".
 >
-> **Foco:** risco de *processo* e *continuidade operacional* — nunca avaliação de
+> **Foco:** risco de *processo* e *continuidade operacional*, nunca avaliação de
 > desempenho de pessoas.
 
 ## 0. Parâmetro central: o que é um "Executor Capaz"
@@ -355,7 +355,7 @@ peso(Alta)  = 5
 Valores **explícitos, configuráveis e constantes** em qualquer comparação.
 Parâmetro documentado e ajustável ≠ número arbitrário escondido.
 
-## 1. Bus Factor (BF) — métrica principal
+## 1. Bus Factor (BF), métrica principal
 Mede o **número mínimo de pessoas cuja indisponibilidade interrompe a execução**.
 
 ### Por atividade
@@ -365,7 +365,7 @@ BF(atividade) = nº de Executores Capazes da atividade
 
 | BF | Categoria | Significado |
 |----|-----------|-------------|
-| 0  | **Órfã**       | Ninguém capaz. Pior que risco crítico — atividade descoberta. |
+| 0  | **Órfã**       | Ninguém capaz. Pior que risco crítico, atividade descoberta. |
 | 1  | **Risco crítico** | Uma única ausência interrompe a atividade. |
 | 2  | **Risco moderado** | Tolera uma ausência. |
 | ≥3 | **Resiliente** | Folga operacional. |
@@ -373,21 +373,21 @@ BF(atividade) = nº de Executores Capazes da atividade
 > **BF = 0 é categoria própria**, nunca somado ao "risco normal". Órfã é problema de
 > cobertura, não de concentração.
 
-### Por processo — usa o MÍNIMO, não a média
+### Por processo, usa o MÍNIMO, não a média
 ```
 BF(processo) = mínimo de BF(atividade) entre as atividades CRÍTICAS do processo
 ```
 **Por que mínimo:** o elo mais fraco derruba a cadeia. Um processo com 9 atividades
-cobertas e 1 com BF=1 **não** é saudável — ele quebra exatamente naquela atividade.
+cobertas e 1 com BF=1 **não** é saudável, ele quebra exatamente naquela atividade.
 A média mascararia o risco; o mínimo o expõe.
 
 *Simplificação documentada:* assume-se que toda atividade crítica é necessária à
-execução do processo (sem modelar dependências/ordem entre atividades — fica para
+execução do processo (sem modelar dependências/ordem entre atividades, fica para
 v2).
 
-## 2. Índice de Concentração Operacional (ICO) — por pessoa
+## 2. Índice de Concentração Operacional (ICO), por pessoa
 Mede **quanto do risco operacional crítico está concentrado em um colaborador**. Não
-mede desempenho — mede dependência da organização em relação à pessoa.
+mede desempenho, mede dependência da organização em relação à pessoa.
 
 ```
 Para cada atividade i que a pessoa executa de forma capaz:
@@ -415,9 +415,9 @@ exclusivo".
 > **Limite de alerta** `ICO_ALERTA` (padrão 25): acima disso, a pessoa é sinalizada
 > como ponto de concentração. Configurável.
 
-## 3. Índice de Redundância Operacional (IRO) — global
+## 3. Índice de Redundância Operacional (IRO), global
 Mede a **capacidade da organização de operar diante de férias, afastamentos e
-desligamentos**. Reportado em **duas versões** — a diferença entre elas é, por si só,
+desligamentos**. Reportado em **duas versões**, a diferença entre elas é, por si só,
 um insight vendável.
 
 ### IRO simples (comunicação)
@@ -439,9 +439,9 @@ colapso se os 20% descobertos forem justamente os de alta criticidade. Insight d
 produto: *"Sua cobertura bruta é 80%, mas sua cobertura ponderada por risco é 54%."*
 
 > Na UI, mostrar o **ponderado como número principal** e o simples no detalhe/tooltip
-> — senão o gestor vê dois "percentuais de cobertura" e não sabe em qual acreditar.
+>, senão o gestor vê dois "percentuais de cobertura" e não sabe em qual acreditar.
 
-## 4. Indicador Executivo — contagens acionáveis, não score composto
+## 4. Indicador Executivo, contagens acionáveis, não score composto
 **Decisão deliberada: não existe "Índice de Dependência = 92".** Um índice composto
 que ninguém sabe explicar reintroduz o problema que estamos resolvendo. O topo do
 dashboard usa **contagens impossíveis de contestar e diretamente acionáveis**:
@@ -469,16 +469,16 @@ em um clique.
 | Empresa sem atividades críticas | Métricas ponderadas = N/A (evita divisão por zero). |
 
 ## 6. Premissas e honestidade analítica (exibir na UI e no README)
-- O `nível_de_domínio` é **autodeclarado/atribuído** — portanto subjetivo. A UI
+- O `nível_de_domínio` é **autodeclarado/atribuído**, portanto subjetivo. A UI
   recomenda **revisão pelo gestor**; o sistema não finge precisão absoluta.
 - Não se modela ordem/dependência entre atividades (v1).
-- Pesos e thresholds são parâmetros da empresa — **a comparação só é válida com os
+- Pesos e thresholds são parâmetros da empresa, **a comparação só é válida com os
   mesmos parâmetros**.
 
 > Um sistema que declara suas premissas é mais confiável que um que esconde incerteza
 > atrás de um número "exato".
 
-## 7. Exemplo numérico resolvido — Empresa Fictícia "Acme"
+## 7. Exemplo numérico resolvido, Empresa Fictícia "Acme"
 **Processo: Folha de Pagamento** (todas atividades de criticidade Alta, peso 5)
 
 | Atividade | Executores capazes (nível) | BF |
@@ -498,7 +498,7 @@ Fechar comp.:    5 × (1/1) = 5,00
 ICO_bruto = 12,50  →  ICO = 12,5 / 100 × 100 = 12,5
 ```
 Somando as demais atividades de Maria em outros processos, ela facilmente ultrapassa
-`ICO_ALERTA = 25` → sinalizada como ponto de concentração — **com a lista exata que
+`ICO_ALERTA = 25` → sinalizada como ponto de concentração, **com a lista exata que
 justifica o número.**
 
 **IRO** (suponha 4 atividades, pesos todos 5; 1 com BF≥2):
@@ -527,7 +527,7 @@ IRO_simples = 25%   mas   IRO_pond = 1 / 16 × 100 ≈ 6%
           └─────────────┼─────────────┘
                         ▼
           Contagens acionáveis (dashboard executivo)
-              — sem score composto opaco —
+             , sem score composto opaco ,
 ```
 
 **Toda a inteligência do NexPerson deriva de um único parâmetro auditável.** Essa é
@@ -535,9 +535,9 @@ a frase que resume o rigor do projeto.
 
 ---
 
-# Parte V — Stack e Identidade Visual
+# Parte V, Stack e Identidade Visual
 
-## Stack (decidida — ver ADR-006)
+## Stack (decidida, ver ADR-006)
 - **Frontend:** Next.js · React · TypeScript · Tailwind CSS · Shadcn/UI
 - **Visualização:** React Flow
 - **Backend / Dados:** Next.js (API routes / server actions) + PostgreSQL via
@@ -547,7 +547,7 @@ a frase que resume o rigor do projeto.
 - **Hospedagem:** Vercel (app) · Supabase (banco/auth)
 
 ## Identidade Visual
-- **Nome:** NexPerson — *Nexus* (conexões) + pessoas-chave do projeto. Remete a
+- **Nome:** NexPerson, *Nexus* (conexões) + pessoas-chave do projeto. Remete a
   conexões entre pessoas e processos, inteligência organizacional e mapeamento de
   dependências.
 - **Slogan:** "Transformando conhecimento em continuidade."

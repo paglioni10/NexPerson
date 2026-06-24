@@ -9,7 +9,7 @@ import {
 } from "./metrics";
 
 /**
- * Camada de IA — APENAS linguagem (ADR-001 + ADR-004).
+ * Camada de IA, APENAS linguagem (ADR-001 + ADR-004).
  * A IA não calcula nada: recebe os números já apurados pelas views e os traduz
  * em texto. Sempre há fallback determinístico se a chave/serviço falhar.
  */
@@ -58,6 +58,7 @@ REGRAS:
 2. NÃO avalie desempenho de pessoas. Analise a vulnerabilidade dos PROCESSOS e a concentração de conhecimento, com foco em resiliência.
 3. Toda conclusão é uma SUGESTÃO de apoio à decisão humana.
 4. Português do Brasil, tom corporativo, claro, sem emojis.
+5. Não use o caractere travessão; prefira vírgulas, dois-pontos ou ponto final.
 GLOSSÁRIO: Bus Factor (BF) = nº mínimo de pessoas cuja ausência interrompe um processo (0 = órfã; 1 = crítico). ICO = concentração de risco numa pessoa. IRO ponderado = % de cobertura com backup. Falso backup = designado sem capacidade real.`;
 
 const TASK = `Com base no JSON, responda APENAS com um objeto JSON válido (sem markdown) no formato:
@@ -109,7 +110,7 @@ export async function gerarAnalise(): Promise<Analise> {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
 
   try {
-    // O modelo pode retornar 503 (alta demanda) de forma transitória — tentamos de novo.
+    // O modelo pode retornar 503 (alta demanda) de forma transitória, tentamos de novo.
     let res: Response | null = null;
     for (let tentativa = 0; tentativa < 3; tentativa++) {
       res = await fetch(url, {
