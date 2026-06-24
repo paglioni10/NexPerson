@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "db:up": "docker compose up -d",
-    "db:reset": "docker compose down -v && docker compose up -d"
+    "db:reset": "docker compose down -v && docker compose up -d",
+    "db:migrate": "node db/migrate.mjs"
   },
   "dependencies": {
     "@xyflow/react": "^12.11.1",
