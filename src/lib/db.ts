@@ -19,8 +19,12 @@ const globalForDb = globalThis as unknown as { sql?: ReturnType<typeof postgres>
 export const sql =
   globalForDb.sql ??
   postgres(connectionString, {
-    max: usaPooler ? 1 : 5,
+    // Em pooler de transação, queries paralelas precisam de conexões próprias
+    // (pipelining numa só conexão trava o pgbouncer). prepare desligado é obrigatório.
+    max: usaPooler ? 10 : 5,
     prepare: !usaPooler,
+    idle_timeout: 20,
+    connect_timeout: 10,
   });
 
 if (process.env.NODE_ENV !== "production") globalForDb.sql = sql;
