@@ -17,7 +17,30 @@ em indicadores auditáveis e acionáveis.
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-22C55E)
 
+**[🔗 Acessar a demonstração ao vivo](https://nexperson.vercel.app)**
+
 </div>
+
+---
+
+## Demonstração
+
+> Aplicação no ar com dados de demonstração: **https://nexperson.vercel.app**
+
+### Dashboard executivo
+Contagens acionáveis de risco, cada número rastreável até a origem.
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Mapa de dependência
+Grafo interativo Processo → Atividade → Colaborador, com gargalos destacados por Bus Factor.
+
+![Mapa de dependência](docs/screenshots/mapa.png)
+
+### Simulação de impacto
+Recálculo determinístico de "o que acontece se a pessoa sair".
+
+![Simulação de impacto](docs/screenshots/simulacao.png)
 
 ---
 
